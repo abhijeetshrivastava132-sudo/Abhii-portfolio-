@@ -1,257 +1,159 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhii Portfolio</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-body {
-    margin: 0;
-    background: black;
-    color: white;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
-
-#typing {
-    position: absolute;
-    top: 40%;
-    width: 100%;
-    text-align: center;
-    font-size: 28px;
-    white-space: pre-line;
-}
-
-.navbar {
-    position: absolute;
-    top: -80px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    transition: 0.8s;
-}
-
-.nav-box {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background: rgba(255,255,255,0.05);
-    padding: 10px 25px;
-    border-radius: 25px;
-}
-
-.navbar a { color: white; text-decoration: none; cursor: pointer; }
-
-.home-icon { cursor: pointer; }
-
-.icons {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-}
-
-.icons i {
-    margin: 0 15px;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-.section {
-    display: none;
-    position: absolute;
-    top: 25%;
-    width: 100%;
-    text-align: center;
-}
-
-.section.show { display: block; }
-
-.show-navbar { top: 20px; }
-.show-icons { opacity: 1; transition: 2s; }
-
-canvas {
-    background: #222;
-    border: 2px solid white;
-    margin-top: 10px;
-}
-button {
-    padding: 8px 15px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-</style>
-</head>
-
-<body>
-
-<div id="typing"></div>
-
-<div class="navbar" id="navbar">
-  <div class="nav-box">
-    <i class="fa-solid fa-house home-icon" onclick="goHome()"></i>
-    <a onclick="showSection('about')">About</a>
-    <a onclick="showSection('projects')">Projects</a>
-    <a onclick="showSection('contact')">Contact</a>
-  </div>
-</div>
-
-<div class="icons" id="icons">
-  <i class="fa-brands fa-snapchat"></i>
-  <i class="fa-brands fa-whatsapp"></i>
-  <i class="fa-brands fa-instagram"></i>
-</div>
-
-<!-- ABOUT -->
-<div id="about" class="section">
-  <h2>About Me</h2>
-  <p>Learning web dev and building projects step by step.</p>
-</div>
-
-<!-- PROJECTS + GAME -->
-<div id="projects" class="section">
-  <h2>Projects</h2>
-
-  <button onclick="openGame()">Play Cat Runner 🐱</button>
-
-  <div id="gameBox" style="display:none;">
-    <canvas id="game" width="800" height="300"></canvas><br>
-    <button onclick="restartGame()">Restart</button>
-    <p id="scoreText">Score: 0</p>
-  </div>
-</div>
-
-<!-- CONTACT -->
-<div id="contact" class="section">
-  <h2>Contact</h2>
-  <p>Email: example@gmail.com</p>
-</div>
-
-<script>
-let text = `ni hao fine shytt\nexplore my work`;
-let i = 0;
-
-function typeEffect() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML = text.substring(0, i+1);
-    i++;
-    setTimeout(typeEffect, 60);
-  } else {
-    document.getElementById("navbar").classList.add("show-navbar");
-    document.getElementById("icons").classList.add("show-icons");
-  }
-}
-typeEffect();
-
-function showSection(id) {
-  document.getElementById("typing").style.display = "none";
-  document.getElementById("icons").style.display = "none";
-
-  document.querySelectorAll(".section").forEach(s => s.classList.remove("show"));
-  document.getElementById(id).classList.add("show");
-}
-
-function goHome() {
-  document.querySelectorAll(".section").forEach(s => s.classList.remove("show"));
-  document.getElementById("typing").style.display = "block";
-  document.getElementById("icons").style.display = "block";
-}
-
-/* ===== GAME ===== */
-
-let cat, obstacle, ctx, gameOver, score;
-
-function initGame() {
-  const canvas = document.getElementById("game");
-  ctx = canvas.getContext("2d");
-
-  cat = { x: 60, y: 220, w: 40, h: 40, vy: 0 };
-  obstacle = { x: 800, y: 230, w: 30, h: 30, speed: 6 };
-
-  gameOver = false;
-  score = 0;
-
-  document.getElementById("scoreText").innerText = "Score: 0";
-}
-
-function loop() {
-  ctx.clearRect(0,0,800,300);
-
-  // ground
-  ctx.fillStyle = "white";
-  ctx.fillRect(0,260,800,2);
-
-  // 🐱 CUTE CAT
-  ctx.font = "28px Arial";
-  ctx.fillText("🐱", cat.x, cat.y + 25);
-
-  // obstacle
-  ctx.fillStyle = "red";
-  ctx.fillRect(obstacle.x, obstacle.y, obstacle.w, obstacle.h);
-
-  if (!gameOver) {
-    cat.y += cat.vy;
-    cat.vy += 0.8;
-
-    if (cat.y > 220) {
-      cat.y = 220;
-      cat.vy = 0;
-    }
-
-    obstacle.x -= obstacle.speed;
-
-    if (obstacle.x < -30) {
-      obstacle.x = 800;
-      score++;
-      document.getElementById("scoreText").innerText = "Score: " + score;
-    }
-
-    if (
-      cat.x < obstacle.x + obstacle.w &&
-      cat.x + cat.w > obstacle.x &&
-      cat.y < obstacle.y + obstacle.h &&
-      cat.y + cat.h > obstacle.y
-    ) {
-      gameOver = true;
-    }
-  } else {
-    ctx.fillStyle = "white";
-    ctx.font = "30px Arial";
-    ctx.fillText("Game Over", 300, 150);
-  }
-
-  requestAnimationFrame(loop);
-}
-
-function openGame() {
-  document.getElementById("gameBox").style.display = "block";
-  initGame();
-  loop();
-}
-
-function restartGame() {
-  initGame();
-}
-
-/* ===== CONTROLS (PC + MOBILE) ===== */
-
-function jump() {
-  if (cat && !gameOver && cat.y >= 220) {
-    cat.vy = -12;
-  }
-}
-
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Space") jump();
-});
-
-document.addEventListener("touchstart", jump);
-
-</script>
-
-</body>
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Abhii Portfolio</title>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  <style>  
+body {  
+    margin: 0;  
+    background: black;  
+    color: white;  
+    font-family: Arial, sans-serif;  
+    overflow: hidden;  
+}  
+  
+/* Typing */  
+#typing {  
+    position: absolute;  
+    top: 40%;  
+    width: 100%;  
+    text-align: center;  
+    font-size: 28px;  
+    white-space: pre-line;  
+}  
+  
+/* Navbar */  
+.navbar {  
+    position: absolute;  
+    top: -80px;  
+    width: 100%;  
+    display: flex;  
+    justify-content: center; /* 👈 always center */  
+    transition: 0.8s;  
+}  
+  
+.nav-box {  
+    display: flex;  
+    align-items: center;  
+    gap: 20px;  
+    background: rgba(255,255,255,0.05);  
+    padding: 10px 25px;  
+    border-radius: 25px;  
+    backdrop-filter: blur(10px);  
+}  
+  
+/* Nav links */  
+.navbar a {  
+    color: white;  
+    text-decoration: none;  
+    cursor: pointer;  
+}  
+  
+.navbar a:hover {  
+    color: crimson;  
+}  
+  
+/* Home icon */  
+.home-icon {  
+    font-size: 18px;  
+    cursor: pointer;  
+}  
+  
+.home-icon:hover {  
+    color: crimson;  
+}  
+  
+/* Icons */  
+.icons {  
+    position: absolute;  
+    bottom: 20px;  
+    width: 100%;  
+    text-align: center;  
+    opacity: 0;  
+}  
+  
+.icons i {  
+    margin: 0 15px;  
+    font-size: 30px;  
+    cursor: pointer;  
+}  
+  
+/* Sections */  
+.section {  
+    display: none;  
+    position: absolute;  
+    top: 30%;  
+    width: 100%;  
+    text-align: center;  
+    opacity: 0;  
+    transition: 1s;  
+}  
+  
+.section.show {  
+    display: block;  
+    opacity: 1;  
+}  
+  
+/* Animations */  
+.show-navbar { top: 20px; }  
+.show-icons { opacity: 1; transition: 2s; }  
+</style>  </head>  <body>  <div id="typing"></div>  <!-- Navbar -->  <div class="navbar" id="navbar">  
+  <div class="nav-box">  
+    <i class="fa-solid fa-house home-icon" onclick="goHome()"></i>  
+    <a onclick="showSection('about')">About</a>  
+    <a onclick="showSection('projects')">Projects</a>  
+    <a onclick="showSection('contact')">Contact</a>  
+  </div>  
+</div>  <!-- Icons (Spotify removed) -->  <div class="icons" id="icons">  
+  <i class="fa-brands fa-snapchat" onclick="window.open('https://snapchat.com/add/x.idfc')"></i>  
+  <i class="fa-brands fa-whatsapp" onclick="window.open('https://wa.me/9631192011')"></i>  
+  <i class="fa-brands fa-instagram" onclick="window.open('https://instagram.com/ft.abh1i')"></i>  
+</div>  <!-- Sections -->  <div id="about" class="section">  
+  <h2>About Me</h2>  
+  <p>I am Abhi, a curious learner who is exploring web development and building projects step by step. I enjoy creating websites and experimenting with different ideas to see how they actually work in real time.  
+Right now, I am learning web development and often use AI tools to help me write and understand code better. I focus on learning by doing, rather than just theory, and I try to improve with every project I build.  
+I am not perfect at coding yet, but I am consistent in learning and improving. I like turning simple ideas into working websites and slowly upgrading them as I gain more understanding.</p>  
+</div>  <div id="projects" class="section">  
+  <h2>Projects</h2>  
+  <p>Coming soon...</p>  
+</div>  <div id="contact" class="section">  
+  <h2>Email</h2>  
+  <p>abhijeetshrivastava132@gmail.com</p>  
+</div>  <script>  
+let text = `ni hao fine shytt  
+explore my work`;  
+let i = 0;  
+  
+function typeEffect() {  
+  if (i < text.length) {  
+    document.getElementById("typing").innerHTML =  
+      text.substring(0, i+1);  
+    i++;  
+    setTimeout(typeEffect, 60);  
+  } else {  
+    document.getElementById("navbar").classList.add("show-navbar");  
+    document.getElementById("icons").classList.add("show-icons");  
+  }  
+}  
+typeEffect();  
+  
+function showSection(id) {  
+  document.getElementById("typing").style.display = "none";  
+  document.getElementById("icons").style.display = "none";  
+  
+  document.querySelectorAll(".section").forEach(sec => {  
+    sec.classList.remove("show");  
+  });  
+  
+  document.getElementById(id).classList.add("show");  
+}  
+  
+function goHome() {  
+  document.querySelectorAll(".section").forEach(sec => {  
+    sec.classList.remove("show");  
+  });  
+  
+  document.getElementById("typing").style.display = "block";  
+  document.getElementById("icons").style.display = "block";  
+}  
+</script>  </body>  
 </html>
