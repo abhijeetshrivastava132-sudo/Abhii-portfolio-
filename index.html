@@ -41,18 +41,11 @@ body {
     background: rgba(255,255,255,0.05);
     padding: 10px 25px;
     border-radius: 25px;
-    backdrop-filter: blur(10px);
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-}
+.navbar a { color: white; text-decoration: none; cursor: pointer; }
 
-.home-icon {
-    cursor: pointer;
-}
+.home-icon { cursor: pointer; }
 
 .icons {
     position: absolute;
@@ -76,9 +69,7 @@ body {
     text-align: center;
 }
 
-.section.show {
-    display: block;
-}
+.section.show { display: block; }
 
 .show-navbar { top: 20px; }
 .show-icons { opacity: 1; transition: 2s; }
@@ -86,6 +77,11 @@ body {
 canvas {
     background: #222;
     border: 2px solid white;
+    margin-top: 10px;
+}
+button {
+    padding: 8px 15px;
+    cursor: pointer;
     margin-top: 10px;
 }
 </style>
@@ -105,34 +101,34 @@ canvas {
 </div>
 
 <div class="icons" id="icons">
-  <i class="fa-brands fa-snapchat" onclick="window.open('https://snapchat.com/add/x.idfc')"></i>
-  <i class="fa-brands fa-whatsapp" onclick="window.open('https://wa.me/9631192011')"></i>
-  <i class="fa-brands fa-instagram" onclick="window.open('https://instagram.com/ft.abh1i')"></i>
+  <i class="fa-brands fa-snapchat"></i>
+  <i class="fa-brands fa-whatsapp"></i>
+  <i class="fa-brands fa-instagram"></i>
 </div>
 
+<!-- ABOUT -->
 <div id="about" class="section">
   <h2>About Me</h2>
-  <p>I am Abhi, learning web development step by step and building projects using AI + logic.</p>
+  <p>Learning web dev and building projects step by step.</p>
 </div>
 
+<!-- PROJECTS + GAME -->
 <div id="projects" class="section">
   <h2>Projects</h2>
 
-  <button onclick="openGame()" style="padding:10px 20px; cursor:pointer;">
-    Play Cat Game 🐱
-  </button>
+  <button onclick="openGame()">Play Cat Runner 🐱</button>
 
   <div id="gameBox" style="display:none;">
     <canvas id="game" width="800" height="300"></canvas><br>
     <button onclick="restartGame()">Restart</button>
+    <p id="scoreText">Score: 0</p>
   </div>
-
-  <p id="scoreText">Score: 0</p>
 </div>
 
+<!-- CONTACT -->
 <div id="contact" class="section">
   <h2>Contact</h2>
-  <p>abhijeetshrivastava132@gmail.com</p>
+  <p>Email: example@gmail.com</p>
 </div>
 
 <script>
@@ -173,7 +169,7 @@ function initGame() {
   const canvas = document.getElementById("game");
   ctx = canvas.getContext("2d");
 
-  cat = { x: 50, y: 220, w: 40, h: 40, vy: 0 };
+  cat = { x: 60, y: 220, w: 40, h: 40, vy: 0 };
   obstacle = { x: 800, y: 230, w: 30, h: 30, speed: 6 };
 
   gameOver = false;
@@ -189,10 +185,9 @@ function loop() {
   ctx.fillStyle = "white";
   ctx.fillRect(0,260,800,2);
 
-  // cat
-  ctx.fillStyle = "orange";
-  ctx.fillRect(cat.x, cat.y, cat.w, cat.h);
-  ctx.fillText("🐱", cat.x+10, cat.y+25);
+  // 🐱 CUTE CAT
+  ctx.font = "28px Arial";
+  ctx.fillText("🐱", cat.x, cat.y + 25);
 
   // obstacle
   ctx.fillStyle = "red";
@@ -242,11 +237,20 @@ function restartGame() {
   initGame();
 }
 
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Space" && cat) {
+/* ===== CONTROLS (PC + MOBILE) ===== */
+
+function jump() {
+  if (cat && !gameOver && cat.y >= 220) {
     cat.vy = -12;
   }
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") jump();
 });
+
+document.addEventListener("touchstart", jump);
+
 </script>
 
 </body>
