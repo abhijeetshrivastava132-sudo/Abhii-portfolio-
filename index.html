@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Abhii Portfolio</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* Typing */
+#typing {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+}
+
+/* Navbar */
+.navbar {
+    position: absolute;
+    top: -80px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* 👈 always center */
+    transition: 0.8s;
+}
+
+.nav-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.05);
+    padding: 10px 25px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+/* Nav links */
+.navbar a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navbar a:hover {
+    color: crimson;
+}
+
+/* Home icon */
+.home-icon {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.home-icon:hover {
+    color: crimson;
+}
+
+/* Icons */
+.icons {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+}
+
+.icons i {
+    margin: 0 15px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Sections */
+.section {
+    display: none;
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: 1s;
+}
+
+.section.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Animations */
+.show-navbar { top: 20px; }
+.show-icons { opacity: 1; transition: 2s; }
+</style>
+</head>
+
+<body>
+
+<div id="typing"></div>
+
+<!-- Navbar -->
+<div class="navbar" id="navbar">
+  <div class="nav-box">
+    <i class="fa-solid fa-house home-icon" onclick="goHome()"></i>
+    <a onclick="showSection('about')">About</a>
+    <a onclick="showSection('projects')">Projects</a>
+    <a onclick="showSection('contact')">Contact</a>
+  </div>
+</div>
+
+<!-- Icons (Spotify removed) -->
+<div class="icons" id="icons">
+  <i class="fa-brands fa-snapchat" onclick="window.open('https://snapchat.com/x.idfc')"></i>
+  <i class="fa-brands fa-whatsapp" onclick="window.open('https://wa.me/919631192011')"></i>
+  <i class="fa-brands fa-instagram" onclick="window.open('https://instagram.com/ft.abh1i')"></i>
+</div>
+
+<!-- Sections -->
+<div id="about" class="section">
+  <h2>About Me</h2>
+  <p>hello! I'm Abhii.</p>
+</div>
+
+<div id="projects" class="section">
+  <h2>Projects</h2>
+  <p>Coming soon...</p>
+</div>
+
+<div id="contact" class="section">
+  <h2>Contact</h2>
+  <p>Email: abhijeetshrivastava132@gmail.com</p>
+</div>
+
+<script>
+let text = "ni hao fine shytt";
+let i = 0;
+
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML =
+      text.substring(0, i+1);
+    i++;
+    setTimeout(typeEffect, 60);
+  } else {
+    document.getElementById("navbar").classList.add("show-navbar");
+    document.getElementById("icons").classList.add("show-icons");
+  }
+}
+typeEffect();
+
+function showSection(id) {
+  document.getElementById("typing").style.display = "none";
+  document.getElementById("icons").style.display = "none";
+
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.classList.remove("show");
+  });
+
+  document.getElementById(id).classList.add("show");
+}
+
+function goHome() {
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.classList.remove("show");
+  });
+
+  document.getElementById("typing").style.display = "block";
+  document.getElementById("icons").style.display = "block";
+}
+</script>
+
+</body>
+</html>
