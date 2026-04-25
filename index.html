@@ -71,7 +71,7 @@ body{
   background:rgba(255,255,255,0.06);
   backdrop-filter:blur(16px);
   box-shadow:0 0 30px rgba(255,0,60,0.08);
-  border:1px solid crimson;
+  border-bottom:2px solid crimson;
 }
 
 .nav-box a{
@@ -675,6 +675,7 @@ function toggleMenu(){
 document.addEventListener("click", function(e){
   const menu = document.getElementById("menuDropdown");
   const menuBtn = document.querySelector(".nav-box a:first-child");
+  const closeBtn = document.querySelector(".menu-close");
   
   if(menu && !menu.contains(e.target) && menuBtn && !menuBtn.contains(e.target)){
     menu.classList.remove("show");
