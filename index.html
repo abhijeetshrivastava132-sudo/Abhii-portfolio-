@@ -4,10 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abhii Portfolio</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
@@ -18,6 +16,41 @@ body{
   overflow:hidden;
 }
 
+/* BACK BUTTON - Left Bottom Center */
+.back-btn{
+  position:fixed;
+  bottom:50%;
+  left:30px;
+  transform:translateY(50%);
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,0,60,0.3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  color:#aaa;
+  font-size:16px;
+  box-shadow:0 0 30px rgba(255,0,60,0.08);
+  z-index:100;
+}
+.back-btn:hover{
+  color:crimson;
+  background:rgba(255,0,60,0.1);
+  border-color:rgba(255,0,60,0.6);
+  transform:translateY(50%) scale(1.1);
+}
+.back-btn.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
 /* NAVBAR */
 .navbar{
   position:absolute;
@@ -26,6 +59,7 @@ body{
   display:flex;
   justify-content:center;
   transition:0.8s;
+  z-index:50;
 }
 .show-navbar{top:25px;}
 
@@ -37,6 +71,7 @@ body{
   background:rgba(255,255,255,0.06);
   backdrop-filter:blur(16px);
   box-shadow:0 0 30px rgba(255,0,60,0.08);
+  border:1px solid crimson;
 }
 
 .nav-box a{
@@ -45,8 +80,210 @@ body{
   font-size:14px;
   cursor:pointer;
   transition:0.3s;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 .nav-box a:hover{color:crimson;}
+
+/* MENU DROPDOWN */
+.menu-dropdown{
+  position:fixed;
+  top:70px;
+  right:30px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,0,60,0.3);
+  border-radius:15px;
+  padding:50px 0 0 0;
+  width:250px;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  box-shadow:0 0 30px rgba(255,0,60,0.08);
+  z-index:200;
+  max-height:500px;
+  overflow-y:auto;
+}
+.menu-dropdown.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Menu Header */
+.menu-header-top{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:rgba(255,0,60,0.03);
+  border-radius:15px 15px 0 0;
+}
+
+.menu-header-top h3{
+  font-size:14px;
+  color:#aaa;
+  font-weight:600;
+  margin:0;
+}
+
+/* Menu Close Button */
+.menu-close{
+  background:none;
+  border:none;
+  color:#aaa;
+  cursor:pointer;
+  font-size:18px;
+  transition:0.3s;
+  z-index:301;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+.menu-close:hover{
+  color:crimson;
+  transform:rotate(90deg);
+}
+
+.menu-item{
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.menu-item:last-child{
+  border-bottom:none;
+}
+
+.menu-header{
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  transition:0.3s;
+  user-select:none;
+}
+
+.menu-header:hover{
+  background:rgba(255,0,60,0.05);
+}
+
+.menu-header h3{
+  font-size:13px;
+  color:#aaa;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:0;
+}
+
+.menu-header i:last-child{
+  font-size:12px;
+  transition:0.3s;
+}
+
+.menu-item.active .menu-header i:last-child{
+  transform:rotate(180deg);
+}
+
+.menu-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.3s ease;
+}
+
+.menu-content.show{
+  max-height:300px;
+}
+
+/* Social Links */
+.social-links{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding:10px 0;
+}
+
+.social-links a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#aaa;
+  text-decoration:none;
+  font-size:13px;
+  padding:10px 20px;
+  transition:0.3s;
+}
+
+.social-links a:hover{
+  color:crimson;
+  background:rgba(255,0,60,0.1);
+}
+
+.social-links i{
+  font-size:16px;
+  width:20px;
+}
+
+/* Email */
+.email-section a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:crimson;
+  text-decoration:none;
+  font-size:13px;
+  padding:10px 20px;
+  transition:0.3s;
+  word-break:break-all;
+}
+
+.email-section a:hover{
+  color:#ff4d7d;
+  background:rgba(255,0,60,0.1);
+}
+
+.email-section i{
+  font-size:16px;
+  width:20px;
+}
+
+.email-content{
+  padding:10px 0;
+}
+
+/* Date Time */
+.datetime-content{
+  padding:15px 20px;
+}
+
+.datetime-section{
+  border-radius:8px;
+  background:rgba(255,0,60,0.05);
+  padding:10px;
+}
+
+.datetime-section p{
+  color:#ccc;
+  margin:8px 0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
+}
+
+.datetime-section i{
+  font-size:14px;
+  color:crimson;
+  width:16px;
+}
 
 /* HERO */
 .hero{
@@ -82,6 +319,7 @@ body{
   text-align:center;
   opacity:0;
   transition:1.5s;
+  display:none;
 }
 .show-icons{opacity:1;}
 .icons i{
@@ -100,10 +338,12 @@ body{
 .section{
   display:none;
   position:absolute;
-  top:18%;
+  top:12%;
   width:100%;
   text-align:center;
   padding:0 30px;
+  overflow-y:auto;
+  max-height:75vh;
 }
 .section.show{display:block;}
 
@@ -138,7 +378,14 @@ body{
   color:white;
   outline:none;
   transition:0.3s;
+  font-family:'Courier New',Monospace;
 }
+
+.contact-form textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
 .contact-form input:focus,
 .contact-form textarea:focus{
   border:1px solid crimson;
@@ -191,12 +438,100 @@ body{
 }
 </style>
 </head>
-
 <body>
+
+<!-- BACK BUTTON -->
+<div class="back-btn" id="backBtn" onclick="goHome()">
+  <i class="fa-solid fa-arrow-left"></i>
+</div>
+
+<!-- MENU DROPDOWN -->
+<div class="menu-dropdown" id="menuDropdown">
+  <div class="menu-header-top">
+    <h3>Menu</h3>
+    <button class="menu-close" onclick="toggleMenu()" title="Close">
+      <i class="fa-solid fa-times"></i>
+    </button>
+  </div>
+  
+  <!-- Connect Section -->
+  <div class="menu-item" id="connectItem">
+    <div class="menu-header" onclick="toggleMenuSection('connect')">
+      <h3>
+        <i class="fa-solid fa-link"></i>
+        Connect
+      </h3>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <div class="menu-content" id="connectContent">
+      <div class="social-links">
+        <a href="https://instagram.com/ft.abh1i" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+          Instagram
+        </a>
+        <a href="https://wa.me/919631192011" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i>
+          WhatsApp
+        </a>
+        <a href="https://snapchat.com/x.idfc" target="_blank">
+          <i class="fa-brands fa-snapchat"></i>
+          Snapchat
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email Section -->
+  <div class="menu-item" id="emailItem">
+    <div class="menu-header" onclick="toggleMenuSection('email')">
+      <h3>
+        <i class="fa-solid fa-envelope"></i>
+        Email
+      </h3>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <div class="menu-content" id="emailContent">
+      <div class="email-content email-section">
+        <a href="mailto:abhijeetshrivastava132@gmail.com">
+          <i class="fa-solid fa-envelope"></i>
+          abhijeetshrivastava132@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Date and Time Section -->
+  <div class="menu-item" id="dateItem">
+    <div class="menu-header" onclick="toggleMenuSection('datetime')">
+      <h3>
+        <i class="fa-solid fa-clock"></i>
+        DateTime
+      </h3>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <div class="menu-content" id="datetimeContent">
+      <div class="datetime-content">
+        <div class="datetime-section">
+          <p>
+            <i class="fa-solid fa-calendar"></i>
+            <span id="currentDate">--</span>
+          </p>
+          <p>
+            <i class="fa-solid fa-clock"></i>
+            <span id="currentTime">--:--:--</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <div class="navbar" id="navbar">
   <div class="nav-box">
-    <a onclick="goHome()">Home</a>
+    <a onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </a>
     <a onclick="showSection('about')">About</a>
     <a onclick="showSection('projects')">Projects</a>
     <a onclick="showSection('contact')">Contact</a>
@@ -213,8 +548,7 @@ body{
   <i class="fa-brands fa-snapchat" onclick="openLink('https://snapchat.com/x.idfc')"></i>
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="section">
+<!--d="about" class="section">
   <h2>About Me</h2>
   <p id="about-text"></p>
 </div>
@@ -242,6 +576,31 @@ body{
 </div>
 
 <script>
+// DATE AND TIME FUNCTION
+function updateDateTime() {
+  const now = new Date();
+  
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = now.getFullYear();
+  
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  
+  const dateString = `${day}/${month}/${year}`;
+  const timeString = `${hours}:${minutes}:${seconds}`;
+  
+  const dateEl = document.getElementById('currentDate');
+  const timeEl = document.getElementById('currentTime');
+  
+  if (dateEl) dateEl.textContent = dateString;
+  if (timeEl) timeEl.textContent = timeString;
+}
+
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
 const roles = [
   "I build websites",
   "clean UI",
@@ -264,11 +623,11 @@ function typeEffect() {
   if (!deleting && charIndex < current.length) {
     charIndex++;
     setTimeout(typeEffect, 70);
-  } 
+  }
   else if (deleting && charIndex > 0) {
     charIndex--;
     setTimeout(typeEffect, 35);
-  } 
+  }
   else {
     deleting = !deleting;
     if (!deleting) roleIndex = (roleIndex + 1) % roles.length;
@@ -280,11 +639,10 @@ function typeEffect() {
 }
 typeEffect();
 
-// ABOUT
 let aboutText = `
-Hi, I’m Abhijeet Shrivastava.
-I build websites using AI tools and my own ideas. I’m still learning, but I focus on making clean and modern designs that actually look good without unnecessary complexity.
-I don’t have big experience yet — I just keep building and focus on design, performance, and constant improvement.`;
+Hi, I'm Abhijeet Shrivastava.
+I build websites using AI tools and my own ideas. I'm still learning, but I focus on making clean and modern designs that actually look good without unnecessary complexity.
+I don't have big experience yet — I just keep building and focus on design, performance, and constant improvement.`;
 
 let j = 0;
 function typeAbout() {
@@ -300,13 +658,43 @@ function typeAbout() {
   }
 }
 
-// NAV
+function toggleMenuSection(section){
+  const item = document.getElementById(section + 'Item');
+  const content = document.getElementById(section + 'Content');
+  
+  if(item) item.classList.toggle('active');
+  if(content) content.classList.toggle('show');
+}
+
+function toggleMenu(){
+  const menu = document.getElementById("menuDropdown");
+  if(menu) menu.classList.toggle("show");
+}
+
+document.addEventListener("click", function(e){
+  const menu = document.getElementById("menuDropdown");
+  const menuBtn = document.querySelector(".nav-box a:first-child");
+  
+  if(menu && !menu.contains(e.target) && menuBtn && !menuBtn.contains(e.target)){
+    menu.classList.remove("show");
+  }
+});
+
 function showSection(id){
   document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("show"));
-  document.querySelector(".hero").style.display="none";
-  document.getElementById("icons").style.display="none";
+  const hero = document.querySelector(".hero");
+  const icons = document.getElementById("icons");
+  const menu = document.getElementById("menuDropdown");
+  
+  if(hero) hero.style.display="none";
+  if(icons) icons.style.display="none";
+  if(menu) menu.classList.remove("show");
 
-  document.getElementById(id).classList.add("show");
+  const backBtn = document.getElementById("backBtn");
+  if(backBtn) backBtn.classList.add("show");
+
+  const section = document.getElementById(id);
+  if(section) section.classList.add("show");
 
   if(id==="about"){
     j=0;
@@ -316,39 +704,47 @@ function showSection(id){
 
 function goHome(){
   document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("show"));
-  document.querySelector(".hero").style.display="flex";
-  document.getElementById("icons").style.display="block";
+  const hero = document.querySelector(".hero");
+  const icons = document.getElementById("icons");
+  const backBtn = document.getElementById("backBtn");
+  
+  if(hero) hero.style.display="flex";
+  if(icons) icons.style.display="none";
+  if(backBtn) backBtn.classList.remove("show");
 }
 
 function openLink(url){
   window.open(url,"_blank");
 }
 
-// FORM
 const form=document.getElementById("contact-form");
 
-form.addEventListener("submit", async function(e){
-  e.preventDefault();
-  const data=new FormData(form);
+if(form) {
+  form.addEventListener("submit", async function(e){
+    e.preventDefault();
+    const data=new FormData(form);
 
-  try{
-    const res=await fetch("https://formspree.io/f/xyklvzld",{
-      method:"POST",
-      body:data,
-      headers:{'Accept':'application/json'}
-    });
+    try{
+      const res=await fetch("https://formspree.io/f/xyklvzld",{
+        method:"POST",
+        body:data,
+        headers:{'Accept':'application/json'}
+      });
 
-    if(res.ok){
-      form.reset();
-      document.getElementById("popup").classList.add("show");
+      if(res.ok){
+        form.reset();
+        const popup = document.getElementById("popup");
+        if(popup) popup.classList.add("show");
+      }
+    }catch{
+      alert("Error sending message");
     }
-  }catch{
-    alert("Error");
-  }
-});
+  });
+}
 
 function goHomeFromPopup(){
-  document.getElementById("popup").classList.remove("show");
+  const popup = document.getElementById("popup");
+  if(popup) popup.classList.remove("show");
   goHome();
 }
 </script>
