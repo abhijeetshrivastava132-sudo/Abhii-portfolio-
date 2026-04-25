@@ -41,6 +41,7 @@ body{
   color:#aaa;
   text-decoration:none;
   font-size:14px;
+  cursor:pointer;
 }
 .nav-box a:hover{color:crimson;}
 
@@ -83,6 +84,7 @@ body{
   margin:0 12px;
   font-size:20px;
   color:#888;
+  cursor:pointer;
 }
 .icons i:hover{color:crimson;}
 
@@ -93,21 +95,22 @@ body{
   top:20%;
   width:100%;
   text-align:center;
-  padding:0 30px; /* 👈 side gap */
+  padding:0 30px;
 }
 .section.show{display:block;}
 
 .section h2{
   font-size:28px;
-  margin-bottom:25px; /* 👈 gap between title & text */
+  margin-bottom:25px;
 }
 
-/* ABOUT TEXT */
+/* ABOUT */
 #about-text{
   font-size:16px;
-  line-height:1.6;
-  max-width:500px;
+  line-height:1.7;
+  max-width:520px;
   margin:auto;
+  text-align:justify;
 }
 
 /* CONTACT */
@@ -125,6 +128,11 @@ body{
   border:1px solid rgba(255,255,255,0.08);
   background:transparent;
   color:white;
+  outline:none; /* remove default yellow */
+}
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border:1px solid crimson; /* thin red line */
 }
 .contact-form button{
   padding:10px;
@@ -217,51 +225,75 @@ body{
 </div>
 
 <script>
-// HERO typing
-let text="Hi, I'm Abhii\nI design websites";
-let i=0;
+// HERO typing (no color changes beyond name)
+const roles = [
+  "I design websites",
+  "clean UI",
+  "smooth experiences"
+];
 
-function typeEffect(){
-  let display=text.substring(0,i+1);
-  i++;
-  display=display.replace(/\n/g,"<br>");
-  display=display.replace("Abhii","<span style='color: crimson;'>Abhii</span>");
+let roleIndex = 0;
+let charIndex = 0;
+let deleting = false;
 
-  document.getElementById("typing").innerHTML=
-    display+"<span class='cursor'></span>";
+function typeEffect() {
+  let current = roles[roleIndex];
+  let text = current.substring(0, charIndex);
 
-  if(i<text.length){
-    setTimeout(typeEffect,90);
-  } else {
-    document.getElementById("navbar").classList.add("show-navbar");
-    document.getElementById("icons").classList.add("show-icons");
+  document.getElementById("typing").innerHTML =
+    `Hi, I'm <span style="color:crimson;">Abhii</span><br>` +
+    text +
+    `<span class="cursor"></span>`;
+
+  if (!deleting && charIndex < current.length) {
+    charIndex++;
+    setTimeout(typeEffect, 80);
+  } 
+  else if (deleting && charIndex > 0) {
+    charIndex--;
+    setTimeout(typeEffect, 40);
+  } 
+  else {
+    deleting = !deleting;
+
+    if (!deleting) {
+      roleIndex = (roleIndex + 1) % roles.length;
+    }
+
+    setTimeout(typeEffect, deleting ? 1200 : 400);
   }
+
+  document.getElementById("navbar").classList.add("show-navbar");
+  document.getElementById("icons").classList.add("show-icons");
 }
+
 typeEffect();
 
-// ABOUT typing
-let aboutText=`Hey, I'm Abhii.
-I turn ideas into clean, aesthetic websites.
-No overdesign, no mess — just simple and smooth.
-Learning every day, building non-stop.`;
 
-let j=0;
+// ABOUT TEXT (plain + slower)
+let aboutText = `I'm Abhii — a self-driven web creator.
+I build minimal, smooth, and clean websites that feel premium without unnecessary complexity.
+Focused on design, performance, and constant improvement.
+Learning, experimenting, and turning ideas into real projects every single day.`;
 
-function typeAbout(){
-  let display=aboutText.substring(0,j+1);
+let j = 0;
+
+function typeAbout() {
+  let display = aboutText.substring(0, j + 1);
   j++;
 
-  display=display.replace(/\n/g,"<br>");
+  display = display.replace(/\n/g, "<br>");
 
-  document.getElementById("about-text").innerHTML=
-    display+"<span class='cursor'></span>";
+  document.getElementById("about-text").innerHTML =
+    display + "<span class='cursor'></span>";
 
-  if(j<aboutText.length){
-    setTimeout(typeAbout,40);
+  if (j < aboutText.length) {
+    setTimeout(typeAbout, 45); // slower
   }
 }
 
-// navigation
+
+// NAVIGATION
 function showSection(id){
   document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("show"));
   document.querySelector(".hero").style.display="none";
@@ -271,7 +303,7 @@ function showSection(id){
 
   if(id==="about"){
     j=0;
-    typeAbout(); // 👈 trigger typing
+    typeAbout();
   }
 }
 
@@ -285,7 +317,8 @@ function openLink(url){
   window.open(url,"_blank");
 }
 
-// form
+
+// FORM
 const form=document.getElementById("contact-form");
 
 form.addEventListener("submit", async function(e){
