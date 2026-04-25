@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abhii Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -12,7 +12,7 @@
 body{
   background:#0a0a0a;
   color:#eaeaea;
-  font-family:'Courier New',Monospace;
+  font-family:'Poppins', sans-serif;
   overflow:hidden;
 }
 
@@ -87,12 +87,12 @@ body{
   position:fixed;
   top:70px;
   right:30px;
-  background:rgba(255,255,255,0.06);
+  background:rgba(20,20,20,0.95);
   backdrop-filter:blur(16px);
   border:1px solid rgba(255,0,60,0.3);
   border-radius:15px;
   padding:50px 0 0 0;
-  width:250px;
+  width:280px;
   opacity:0;
   pointer-events:none;
   transition:0.3s;
@@ -128,7 +128,6 @@ body{
   margin:0;
 }
 
-/* Menu Close Button */
 .menu-close{
   background:none;
   border:none;
@@ -294,6 +293,7 @@ body{
   font-size:30px;
   line-height:1.5;
   letter-spacing:0.5px;
+  font-family:'Courier New',Monospace;
 }
 
 /* CURSOR */
@@ -337,9 +337,9 @@ body{
   top:12%;
   width:100%;
   text-align:center;
-  padding:0 30px;
+  padding:20px 30px;
   overflow-y:auto;
-  max-height:75vh;
+  max-height:80vh;
 }
 .section.show{display:block;}
 
@@ -354,24 +354,375 @@ body{
   justify-content:center;
   align-items:center;
   gap:12px;
-  margin-bottom:25px;
+  margin-bottom:30px;
 }
 
-/* HEADING WITH BACK BUTTON */
-.section-header{
+/* ABOUT SECTION - NEW DESIGN */
+.about-container{
+  max-width:700px;
+  margin:0 auto;
   display:flex;
-  justify-content:center;
+  flex-direction:column;
+  gap:20px;
+}
+
+.about-main-card{
+  background:rgba(20,20,20,0.95);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,0,60,0.15);
+  border-radius:20px;
+  padding:40px;
+  text-align:left;
+  transition:0.3s;
+  position:relative;
+  overflow:hidden;
+}
+
+.about-main-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent, crimson, transparent);
+}
+
+.about-main-card:hover{
+  border-color:rgba(255,0,60,0.4);
+  box-shadow:0 10px 40px rgba(255,0,60,0.1);
+}
+
+.about-label{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:#666;
+  margin-bottom:15px;
+  font-weight:500;
+}
+
+.about-title{
+  font-size:28px;
+  font-weight:600;
+  color:#fff;
+  line-height:1.4;
+  margin-bottom:15px;
+}
+
+.about-title span{
+  color:crimson;
+}
+
+.about-description{
+  color:#999;
+  font-size:14px;
+  line-height:1.8;
+  margin-bottom:25px;
+  font-weight:300;
+}
+
+/* Available for work badge */
+.availability-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 20px;
+  border-radius:25px;
+  background:rgba(255,0,60,0.08);
+  border:1px solid rgba(255,0,60,0.3);
+  color:crimson;
+  font-size:12px;
+  font-weight:500;
+  margin-bottom:25px;
+  transition:0.3s;
+}
+
+.availability-badge:hover{
+  background:rgba(255,0,60,0.15);
+  transform:translateY(-2px);
+}
+
+.availability-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#00ff88;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1;}
+  50%{opacity:0.3;}
+}
+
+/* Social cards */
+.about-social-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:15px;
+}
+
+.social-card{
+  background:rgba(20,20,20,0.95);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:15px;
+  padding:25px;
+  text-align:left;
+  cursor:pointer;
+  transition:0.3s;
+  text-decoration:none;
+  color:#aaa;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.social-card:hover{
+  border-color:rgba(255,0,60,0.4);
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(255,0,60,0.1);
+  color:#fff;
+}
+
+.social-card i{
+  font-size:24px;
+  color:crimson;
+  width:30px;
+}
+
+.social-card-content h4{
+  font-size:14px;
+  color:#fff;
+  font-weight:500;
+  margin-bottom:3px;
+}
+
+.social-card-content p{
+  font-size:11px;
+  color:#666;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+/* Info cards grid */
+.about-info-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  gap:15px;
+}
+
+.info-card{
+  background:rgba(20,20,20,0.95);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:15px;
+  padding:25px 20px;
+  text-align:center;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.info-card:hover{
+  border-color:rgba(255,0,60,0.4);
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(255,0,60,0.1);
+}
+
+.info-card .info-icon{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.info-card h4{
+  font-size:13px;
+  color:#fff;
+  font-weight:500;
+  margin-bottom:5px;
+}
+
+.info-card p{
+  font-size:11px;
+  color:#666;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+/* PREMIUM VERSION CARD */
+.premium-card{
+  background:linear-gradient(135deg, rgba(255,0,60,0.1), rgba(255,0,60,0.05));
+  border:1px solid rgba(255,0,60,0.3);
+  border-radius:15px;
+  padding:25px;
+  text-align:center;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.premium-card:hover{
+  border-color:crimson;
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(255,0,60,0.2);
+}
+
+.premium-card h4{
+  color:crimson;
+  font-size:14px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:5px;
+}
+
+.premium-card p{
+  color:#999;
+  font-size:12px;
+}
+
+/* PROJECTS SECTION */
+.projects-container{
+  max-width:600px;
+  margin:0 auto;
+}
+
+.project-card{
+  background:rgba(20,20,20,0.95);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,0,60,0.2);
+  border-radius:15px;
+  margin-bottom:20px;
+  transition:0.3s;
+  overflow:hidden;
+}
+
+.project-card:hover{
+  border-color:rgba(255,0,60,0.5);
+  box-shadow:0 0 30px rgba(255,0,60,0.1);
+}
+
+.project-header{
+  padding:18px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  transition:0.3s;
+  user-select:none;
+}
+
+.project-header:hover{
+  background:rgba(255,0,60,0.05);
+}
+
+.project-info{
+  display:flex;
   align-items:center;
   gap:12px;
 }
 
-/* ABOUT */
-#about-text{
-  font-size:16px;
-  line-height:1.8;
-  max-width:600px;
-  margin:auto;
+.project-icon{
+  font-size:20px;
+  color:crimson;
+  width:24px;
+}
+
+.project-title-area h3{
+  font-size:15px;
+  color:#eaeaea;
+  font-weight:500;
   text-align:left;
+  margin:0;
+}
+
+.project-meta{
+  display:flex;
+  gap:8px;
+  margin-top:5px;
+}
+
+.tech-tag{
+  font-size:10px;
+  padding:3px 10px;
+  border-radius:20px;
+  background:rgba(255,0,60,0.1);
+  color:crimson;
+  border:1px solid rgba(255,0,60,0.3);
+}
+
+.project-arrow{
+  color:#aaa;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.project-card.active .project-arrow{
+  transform:rotate(180deg);
+  color:crimson;
+}
+
+.project-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.3s ease;
+  background:rgba(255,255,255,0.02);
+}
+
+.project-content.show{
+  max-height:500px;
+}
+
+.project-details{
+  padding:20px 25px;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.project-description{
+  color:#aaa;
+  font-size:13px;
+  line-height:1.8;
+  text-align:left;
+  margin-bottom:20px;
+}
+
+.project-links{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.project-link-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 20px;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:13px;
+  transition:0.3s;
+  border:1px solid rgba(255,0,60,0.3);
+}
+
+.live-link{
+  background:crimson;
+  color:white;
+}
+
+.live-link:hover{
+  background:#ff1a4d;
+  transform:translateY(-2px);
+  box-shadow:0 5px 20px rgba(255,0,60,0.3);
+}
+
+.github-link{
+  background:transparent;
+  color:#aaa;
+}
+
+.github-link:hover{
+  border-color:crimson;
+  color:crimson;
+  transform:translateY(-2px);
 }
 
 /* CONTACT */
@@ -379,19 +730,21 @@ body{
   display:flex;
   flex-direction:column;
   gap:14px;
-  width:280px;
+  width:300px;
   margin:20px auto;
 }
 .contact-form input,
 .contact-form textarea{
-  padding:12px;
-  border-radius:10px;
+  padding:14px;
+  border-radius:12px;
   border:1px solid rgba(255,255,255,0.08);
-  background:rgba(255,255,255,0.02);
+  background:rgba(20,20,20,0.95);
+  backdrop-filter:blur(20px);
   color:white;
   outline:none;
   transition:0.3s;
-  font-family:'Courier New',Monospace;
+  font-family:'Poppins', sans-serif;
+  font-size:14px;
 }
 
 .contact-form textarea{
@@ -402,52 +755,83 @@ body{
 .contact-form input:focus,
 .contact-form textarea:focus{
   border:1px solid crimson;
-  box-shadow:0 0 10px rgba(255,0,60,0.3);
+  box-shadow:0 0 15px rgba(255,0,60,0.2);
 }
 .contact-form button{
-  padding:12px;
+  padding:14px;
   border:none;
-  border-radius:10px;
+  border-radius:12px;
   background:crimson;
   color:white;
   cursor:pointer;
   transition:0.3s;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:1px;
 }
 .contact-form button:hover{
-  transform:scale(1.05);
+  transform:scale(1.02);
+  box-shadow:0 5px 25px rgba(255,0,60,0.3);
 }
 
 /* POPUP */
 .popup{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.8);
   display:flex;
   justify-content:center;
   align-items:center;
   opacity:0;
   pointer-events:none;
   transition:0.3s;
+  z-index:300;
 }
 .popup.show{
   opacity:1;
   pointer-events:auto;
 }
 .popup-box{
-  background:#111;
-  padding:30px;
-  border-radius:14px;
+  background:#1a1a1a;
+  padding:35px;
+  border-radius:20px;
   text-align:center;
-  box-shadow:0 0 40px rgba(255,0,60,0.2);
+  box-shadow:0 0 50px rgba(255,0,60,0.2);
+  border:1px solid rgba(255,0,60,0.2);
+}
+.popup-box h2{
+  margin-bottom:10px;
+  font-weight:600;
 }
 .popup-box button{
   margin-top:15px;
-  padding:10px 22px;
+  padding:12px 30px;
   border:none;
   border-radius:10px;
   background:crimson;
   color:white;
   cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+.popup-box button:hover{
+  background:#ff1a4d;
+  transform:scale(1.05);
+}
+
+/* SCROLLBAR STYLING */
+.section::-webkit-scrollbar{
+  width:6px;
+}
+.section::-webkit-scrollbar-track{
+  background:transparent;
+}
+.section::-webkit-scrollbar-thumb{
+  background:rgba(255,0,60,0.3);
+  border-radius:10px;
+}
+.section::-webkit-scrollbar-thumb:hover{
+  background:rgba(255,0,60,0.5);
 }
 </style>
 </head>
@@ -466,8 +850,7 @@ body{
       <i class="fa-solid fa-times"></i>
     </button>
   </div>
-  
-  <!-- Connect Section -->
+
   <div class="menu-item" id="connectItem">
     <div class="menu-header" onclick="toggleMenuSection('connect')">
       <h3>
@@ -494,7 +877,6 @@ body{
     </div>
   </div>
 
-  <!-- Email Section -->
   <div class="menu-item" id="emailItem">
     <div class="menu-header" onclick="toggleMenuSection('email')">
       <h3>
@@ -513,7 +895,6 @@ body{
     </div>
   </div>
 
-  <!-- Date and Time Section -->
   <div class="menu-item" id="dateItem">
     <div class="menu-header" onclick="toggleMenuSection('datetime')">
       <h3>
@@ -561,17 +942,83 @@ body{
   <i class="fa-brands fa-snapchat" onclick="openLink('https://snapchat.com/x.idfc')"></i>
 </div>
 
-<!-- ABOUT -->
+<!-- ABOUT SECTION - NEW DESIGN -->
 <div id="about" class="section">
   <div class="section-header">
-    <h2>About Me</h2>
+    <h2>About</h2>
     <button class="back-btn-inline" onclick="goHome()" title="Back">
       <i class="fa-solid fa-arrow-left"></i>
     </button>
   </div>
-  <p id="about-text"></p>
+  
+  <div class="about-container">
+    <!-- Main Card -->
+    <div class="about-main-card">
+      <div class="about-label">About</div>
+      <div class="about-title">
+        Freelance <span>designer</span> and <span>developer</span> building fast, intentional websites that actually ship.
+      </div>
+      <div class="about-description">
+        Hi, I'm Abhijeet Shrivastava. I build websites using AI tools and my own ideas. I'm still learning, but I focus on making clean and modern designs that actually look good without unnecessary complexity.
+      </div>
+      <div class="availability-badge">
+        <span class="availability-dot"></span>
+        AVAILABLE FOR WORK
+      </div>
+    </div>
+
+    <!-- Social Cards -->
+    <div class="about-social-cards">
+      <a href="https://linkedin.com" target="_blank" class="social-card">
+        <i class="fa-brands fa-linkedin-in"></i>
+        <div class="social-card-content">
+          <h4>LinkedIn</h4>
+          <p>Let's Connect</p>
+        </div>
+      </a>
+      <a href="https://github.com" target="_blank" class="social-card">
+        <i class="fa-brands fa-github"></i>
+        <div class="social-card-content">
+          <h4>GitHub</h4>
+          <p>View Projects</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="about-info-cards">
+      <div class="info-card">
+        <div class="info-icon">🚀</div>
+        <h4>Fast</h4>
+        <p>Performance First</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🎨</div>
+        <h4>Clean</h4>
+        <p>Modern Design</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">💡</div>
+        <h4>Creative</h4>
+        <p>Unique Ideas</p>
+      </div>
+    </div>
+
+    <!-- Premium Card -->
+    <div class="premium-card">
+      <h4>⭐ Premium Version</h4>
+      <p>Custom websites with advanced features</p>
+    </div>
+
+    <!-- Questions Card -->
+    <div class="premium-card" style="background:rgba(255,255,255,0.02); border-color:rgba(255,255,255,0.1);">
+      <h4 style="color:#aaa;">❓ Questions?</h4>
+      <p>Feel free to reach out for collaborations</p>
+    </div>
+  </div>
 </div>
 
+<!-- PROJECTS -->
 <div id="projects" class="section">
   <div class="section-header">
     <h2>Projects</h2>
@@ -579,12 +1026,80 @@ body{
       <i class="fa-solid fa-arrow-left"></i>
     </button>
   </div>
-  <p>Coming soon...</p>
+  
+  <div class="projects-container">
+    <div class="project-card" id="project1">
+      <div class="project-header" onclick="toggleProject('project1')">
+        <div class="project-info">
+          <div class="project-icon">
+            <i class="fa-solid fa-code"></i>
+          </div>
+       <div class="project-title-area">
+            <h3>Abhii-143</h3>
+            <div class="project-meta">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JS</span>
+            </div>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-down project-arrow"></i>
+      </div>
+      <div class="project-content">
+        <div class="project-details">
+          <p class="project-description">
+            My first project. Built with minimalist and cute design focusing on smooth user experience and aesthetic UI. Features responsive design and interactive elements.
+          </p>
+          <div class="project-links">
+            <a href="https://abhii-143.vercel.app/" target="_blank" class="project-link-btn live-link">
+              <i class="fa-solid fa-external-link-alt"></i>
+              Live Demo
+            </a>
+            <a href="https://abhii-143.vercel.app/" target="_blank" class="project-link-btn github-link">
+              <i class="fa-solid fa-globe"></i>
+              Visit Site
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" id="project2">
+      <div class="project-header" onclick="toggleProject('project2')">
+        <div class="project-info">
+          <div class="project-icon">
+            <i class="fa-solid fa-paint-brush"></i>
+          </div>
+          <div class="project-title-area">
+            <h3>Coming Soon</h3>
+            <div class="project-meta">
+              <span class="tech-tag">Soon</span>
+            </div>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-down project-arrow"></i>
+      </div>
+      <div class="project-content">
+        <div class="project-details">
+          <p class="project-description">
+            Working on something exciting! Stay tuned for more projects coming your way.
+          </p>
+          <div class="project-links">
+            <a href="#" class="project-link-btn github-link">
+              <i class="fa-solid fa-clock"></i>
+              Coming Soon
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- CONTACT -->
 <div id="contact" class="section">
   <div class="section-header">
-    <h2>Contact Me</h2>
+    <h2>Contact</h2>
     <button class="back-btn-inline" onclick="goHome()" title="Back">
       <i class="fa-solid fa-arrow-left"></i>
     </button>
@@ -593,14 +1108,15 @@ body{
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
     <textarea name="message" placeholder="Project Details" required></textarea>
-    <button type="submit">Send</button>
+    <button type="submit">Send Message</button>
   </form>
 </div>
 
 <div id="popup" class="popup">
   <div class="popup-box">
     <h2>Message Sent</h2>
-    <button onclick="goHomeFromPopup()">Home</button>
+    <p style="color:#999;">I'll get back to you soon!</p>
+    <button onclick="goHomeFromPopup()">Back to Home</button>
   </div>
 </div>
 
@@ -608,21 +1124,19 @@ body{
 // DATE AND TIME FUNCTION
 function updateDateTime() {
   const now = new Date();
-  
   const day = String(now.getDate()).padStart(2, '0');
   const month = String(now.getMonth() + 1).padStart(2, '0');
   const year = now.getFullYear();
-  
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   const seconds = String(now.getSeconds()).padStart(2, '0');
-  
+
   const dateString = `${day}/${month}/${year}`;
   const timeString = `${hours}:${minutes}:${seconds}`;
-  
+
   const dateEl = document.getElementById('currentDate');
   const timeEl = document.getElementById('currentTime');
-  
+
   if (dateEl) dateEl.textContent = dateString;
   if (timeEl) timeEl.textContent = timeString;
 }
@@ -668,31 +1182,26 @@ function typeEffect() {
 }
 typeEffect();
 
-let aboutText = `
-Hi, I'm Abhijeet Shrivastava.
-I build websites using AI tools and my own ideas. I'm still learning, but I focus on making clean and modern designs that actually look good without unnecessary complexity.
-I don't have big experience yet — I just keep building and focus on design, performance, and constant improvement.`;
-
-let j = 0;
-function typeAbout() {
-  let display = aboutText.substring(0, j + 1);
-  j++;
-  display = display.replace(/\n/g, "<br><br>");
-
-  document.getElementById("about-text").innerHTML =
-    display + "<span class='cursor'></span>";
-
-  if (j < aboutText.length) {
-    setTimeout(typeAbout, 40);
-  }
-}
-
 function toggleMenuSection(section){
   const item = document.getElementById(section + 'Item');
   const content = document.getElementById(section + 'Content');
-  
   if(item) item.classList.toggle('active');
   if(content) content.classList.toggle('show');
+}
+
+function toggleProject(projectId) {
+  const project = document.getElementById(projectId);
+  const content = project.querySelector('.project-content');
+  
+  document.querySelectorAll('.project-card').forEach(card => {
+    if (card.id !== projectId) {
+      card.classList.remove('active');
+      card.querySelector('.project-content').classList.remove('show');
+    }
+  });
+  
+  project.classList.toggle('active');
+  content.classList.toggle('show');
 }
 
 function toggleMenu(){
@@ -703,7 +1212,6 @@ function toggleMenu(){
 document.addEventListener("click", function(e){
   const menu = document.getElementById("menuDropdown");
   const menuBtn = document.querySelector(".nav-box a:first-child");
-  const closeBtn = document.querySelector(".menu-close");
   
   if(menu && !menu.contains(e.target) && menuBtn && !menuBtn.contains(e.target)){
     menu.classList.remove("show");
@@ -715,7 +1223,7 @@ function showSection(id){
   const hero = document.querySelector(".hero");
   const icons = document.getElementById("icons");
   const menu = document.getElementById("menuDropdown");
-  
+
   if(hero) hero.style.display="none";
   if(icons) icons.style.display="none";
   if(menu) menu.classList.remove("show");
@@ -725,11 +1233,6 @@ function showSection(id){
 
   const section = document.getElementById(id);
   if(section) section.classList.add("show");
-
-  if(id==="about"){
-    j=0;
-    typeAbout();
-  }
 }
 
 function goHome(){
@@ -737,7 +1240,7 @@ function goHome(){
   const hero = document.querySelector(".hero");
   const icons = document.getElementById("icons");
   const backBtn = document.getElementById("backBtn");
-  
+
   if(hero) hero.style.display="flex";
   if(icons) icons.style.display="none";
   if(backBtn) backBtn.classList.remove("show");
