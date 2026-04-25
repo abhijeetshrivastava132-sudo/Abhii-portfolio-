@@ -16,12 +16,13 @@ body{
   overflow:hidden;
 }
 
-/* BACK BUTTON - Left Bottom Center */
+/* BACK BUTTON - Hidden */
 .back-btn{
-  position:fixed;
-  bottom:85%;
-  left:30px;
-  transform:translateY(50%);
+  display:none;
+}
+
+/* BACK BUTTON INLINE */
+.back-btn-inline{
   width:40px;
   height:40px;
   border-radius:50%;
@@ -32,23 +33,18 @@ body{
   justify-content:center;
   align-items:center;
   cursor:pointer;
-  opacity:0;
-  pointer-events:none;
-  transition:0.3s;
   color:#aaa;
   font-size:16px;
   box-shadow:0 0 30px rgba(255,0,60,0.08);
-  z-index:100;
+  transition:0.3s;
+  padding:0;
+  margin-top:5px;
 }
-.back-btn:hover{
+.back-btn-inline:hover{
   color:crimson;
   background:rgba(255,0,60,0.1);
   border-color:rgba(255,0,60,0.6);
-  transform:translateY(50%) scale(1.1);
-}
-.back-btn.show{
-  opacity:1;
-  pointer-events:auto;
+  transform:scale(1.1);
 }
 
 /* NAVBAR */
@@ -71,7 +67,7 @@ body{
   background:rgba(255,255,255,0.06);
   backdrop-filter:blur(16px);
   box-shadow:0 0 30px rgba(255,0,60,0.08);
-  border-bottom:2px solid crimson;
+  border: 1px solid crimson;
 }
 
 .nav-box a{
@@ -349,7 +345,24 @@ body{
 
 .section h2{
   font-size:32px;
+  margin-bottom:0;
+  margin:0;
+}
+
+.section-header{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
   margin-bottom:25px;
+}
+
+/* HEADING WITH BACK BUTTON */
+.section-header{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
 }
 
 /* ABOUT */
@@ -550,17 +563,32 @@ body{
 
 <!-- ABOUT -->
 <div id="about" class="section">
-  <h2>About Me</h2>
+  <div class="section-header">
+    <h2>About Me</h2>
+    <button class="back-btn-inline" onclick="goHome()" title="Back">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+  </div>
   <p id="about-text"></p>
 </div>
 
 <div id="projects" class="section">
-  <h2>Projects</h2>
+  <div class="section-header">
+    <h2>Projects</h2>
+    <button class="back-btn-inline" onclick="goHome()" title="Back">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+  </div>
   <p>Coming soon...</p>
 </div>
 
 <div id="contact" class="section">
-  <h2>Contact Me</h2>
+  <div class="section-header">
+    <h2>Contact Me</h2>
+    <button class="back-btn-inline" onclick="goHome()" title="Back">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+  </div>
   <form id="contact-form" class="contact-form">
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
