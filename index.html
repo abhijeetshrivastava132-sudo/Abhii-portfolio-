@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abhii Portfolio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -13,7 +14,7 @@
 body{
   background:#0a0a0a;
   color:#eaeaea;
-  font-family:"Courier New", monospace;
+  font-family:'Courier New',Monospace;
   overflow:hidden;
 }
 
@@ -31,10 +32,11 @@ body{
 .nav-box{
   display:flex;
   gap:25px;
-  padding:10px 25px;
-  border-radius:30px;
-  background:rgba(255,255,255,0.04);
-  backdrop-filter:blur(12px);
+  padding:12px 30px;
+  border-radius:40px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 30px rgba(255,0,60,0.08);
 }
 
 .nav-box a{
@@ -42,6 +44,7 @@ body{
   text-decoration:none;
   font-size:14px;
   cursor:pointer;
+  transition:0.3s;
 }
 .nav-box a:hover{color:crimson;}
 
@@ -55,8 +58,9 @@ body{
 }
 
 #typing{
-  font-size:26px;
-  line-height:1.4;
+  font-size:30px;
+  line-height:1.5;
+  letter-spacing:0.5px;
 }
 
 /* CURSOR */
@@ -73,7 +77,7 @@ body{
 /* ICONS */
 .icons{
   position:absolute;
-  bottom:25px;
+  bottom:30px;
   width:100%;
   text-align:center;
   opacity:0;
@@ -81,18 +85,22 @@ body{
 }
 .show-icons{opacity:1;}
 .icons i{
-  margin:0 12px;
-  font-size:20px;
-  color:#888;
+  margin:0 14px;
+  font-size:22px;
+  color:#777;
   cursor:pointer;
+  transition:0.3s;
 }
-.icons i:hover{color:crimson;}
+.icons i:hover{
+  color:crimson;
+  transform:translateY(-3px);
+}
 
 /* SECTIONS */
 .section{
   display:none;
   position:absolute;
-  top:20%;
+  top:18%;
   width:100%;
   text-align:center;
   padding:0 30px;
@@ -100,53 +108,60 @@ body{
 .section.show{display:block;}
 
 .section h2{
-  font-size:28px;
+  font-size:32px;
   margin-bottom:25px;
 }
 
 /* ABOUT */
 #about-text{
   font-size:16px;
-  line-height:1.7;
-  max-width:520px;
+  line-height:1.8;
+  max-width:600px;
   margin:auto;
-  text-align:justify;
+  text-align:left;
 }
 
 /* CONTACT */
 .contact-form{
   display:flex;
   flex-direction:column;
-  gap:12px;
-  width:260px;
+  gap:14px;
+  width:280px;
   margin:20px auto;
 }
 .contact-form input,
 .contact-form textarea{
-  padding:10px;
-  border-radius:8px;
+  padding:12px;
+  border-radius:10px;
   border:1px solid rgba(255,255,255,0.08);
-  background:transparent;
+  background:rgba(255,255,255,0.02);
   color:white;
-  outline:none; /* remove default yellow */
+  outline:none;
+  transition:0.3s;
 }
 .contact-form input:focus,
 .contact-form textarea:focus{
-  border:1px solid crimson; /* thin red line */
+  border:1px solid crimson;
+  box-shadow:0 0 10px rgba(255,0,60,0.3);
 }
 .contact-form button{
-  padding:10px;
+  padding:12px;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
   background:crimson;
   color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+.contact-form button:hover{
+  transform:scale(1.05);
 }
 
 /* POPUP */
 .popup{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,0.7);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -160,17 +175,19 @@ body{
 }
 .popup-box{
   background:#111;
-  padding:25px;
-  border-radius:12px;
+  padding:30px;
+  border-radius:14px;
   text-align:center;
+  box-shadow:0 0 40px rgba(255,0,60,0.2);
 }
 .popup-box button{
   margin-top:15px;
-  padding:8px 18px;
+  padding:10px 22px;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
   background:crimson;
   color:white;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -219,17 +236,16 @@ body{
 
 <div id="popup" class="popup">
   <div class="popup-box">
-    <h2>Thanks for contacting</h2>
+    <h2>Message Sent</h2>
     <button onclick="goHomeFromPopup()">Home</button>
   </div>
 </div>
 
 <script>
-// HERO typing (no color changes beyond name)
 const roles = [
-  "I design websites",
+  "I build websites",
   "clean UI",
-  "smooth experiences"
+  "smoot UX"
 ];
 
 let roleIndex = 0;
@@ -247,53 +263,44 @@ function typeEffect() {
 
   if (!deleting && charIndex < current.length) {
     charIndex++;
-    setTimeout(typeEffect, 80);
+    setTimeout(typeEffect, 70);
   } 
   else if (deleting && charIndex > 0) {
     charIndex--;
-    setTimeout(typeEffect, 40);
+    setTimeout(typeEffect, 35);
   } 
   else {
     deleting = !deleting;
-
-    if (!deleting) {
-      roleIndex = (roleIndex + 1) % roles.length;
-    }
-
+    if (!deleting) roleIndex = (roleIndex + 1) % roles.length;
     setTimeout(typeEffect, deleting ? 1200 : 400);
   }
 
   document.getElementById("navbar").classList.add("show-navbar");
   document.getElementById("icons").classList.add("show-icons");
 }
-
 typeEffect();
 
-
-// ABOUT TEXT (plain + slower)
+// ABOUT
 let aboutText = `I'm Abhii — a self-driven web creator.
 I build minimal, smooth, and clean websites that feel premium without unnecessary complexity.
 Focused on design, performance, and constant improvement.
-Learning, experimenting, and turning ideas into real projects every single day.`;
+Learning, experimenting, and turning ideas into real projects every day.`;
 
 let j = 0;
-
 function typeAbout() {
   let display = aboutText.substring(0, j + 1);
   j++;
-
-  display = display.replace(/\n/g, "<br>");
+  display = display.replace(/\n/g, "<br><br>");
 
   document.getElementById("about-text").innerHTML =
     display + "<span class='cursor'></span>";
 
   if (j < aboutText.length) {
-    setTimeout(typeAbout, 45); // slower
+    setTimeout(typeAbout, 40);
   }
 }
 
-
-// NAVIGATION
+// NAV
 function showSection(id){
   document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("show"));
   document.querySelector(".hero").style.display="none";
@@ -316,7 +323,6 @@ function goHome(){
 function openLink(url){
   window.open(url,"_blank");
 }
-
 
 // FORM
 const form=document.getElementById("contact-form");
