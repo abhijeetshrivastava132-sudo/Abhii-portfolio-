@@ -1,160 +1,318 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>Abhii Portfolio</title>  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  <style>  
-body {  
-    margin: 0;  
-    background: black;  
-    color: white;  
-    font-family: Arial, sans-serif;  
-    overflow: hidden;  
-}  
-  
-/* Typing */  
-#typing {  
-    position: absolute;  
-    top: 40%;  
-    width: 100%;  
-    text-align: center;  
-    font-size: 28px;  
-    white-space: pre-line;  
-}  
-  
-/* Navbar */  
-.navbar {  
-    position: absolute;  
-    top: -80px;  
-    width: 100%;  
-    display: flex;  
-    justify-content: center; /* 👈 always center */  
-    transition: 0.8s;  
-}  
-  
-.nav-box {  
-    display: flex;  
-    align-items: center;  
-    gap: 20px;  
-    background: rgba(255,255,255,0.05);  
-    padding: 10px 25px;  
-    border-radius: 25px;  
-    backdrop-filter: blur(10px);  
-}  
-  
-/* Nav links */  
-.navbar a {  
-    color: white;  
-    text-decoration: none;  
-    cursor: pointer;  
-}  
-  
-.navbar a:hover {  
-    color: crimson;  
-}  
-  
-/* Home icon */  
-.home-icon {  
-    font-size: 18px;  
-    cursor: pointer;  
-}  
-  
-.home-icon:hover {  
-    color: crimson;  
-}  
-  
-/* Icons */  
-.icons {  
-    position: absolute;  
-    bottom: 20px;  
-    width: 100%;  
-    text-align: center;  
-    opacity: 0;  
-}  
-  
-.icons i {  
-    margin: 0 15px;  
-    font-size: 30px;  
-    cursor: pointer;  
-}  
-  
-/* Sections */  
-.section {  
-    display: none;  
-    position: absolute;  
-    top: 30%;  
-    width: 100%;  
-    text-align: center;  
-    opacity: 0;  
-    transition: 1s;  
-}  
-  
-.section.show {  
-    display: block;  
-    opacity: 1;  
-}  
-  
-/* Animations */  
-.show-navbar { top: 20px; }  
-.show-icons { opacity: 1; transition: 2s; }  
-</style>  </head>  <body>  <div id="typing"></div>  <!-- Navbar -->  <div class="navbar" id="navbar">  
-  <div class="nav-box">  
-    <i class="fa-solid fa-house home-icon" onclick="goHome()"></i>  
-    <a onclick="showSection('about')">About</a>  
-    <a onclick="showSection('projects')">Projects</a>  
-    <a onclick="showSection('contact')">Contact</a>  
-  </div>  
-</div>  <!-- Icons (Spotify removed) -->  <div class="icons" id="icons">  
-  <i class="fa-brands fa-snapchat" onclick="window.open('https://snapchat.com/add/x.idfc')"></i>  
-  <i class="fa-brands fa-whatsapp" onclick="window.open('https://wa.me/9631192011')"></i>  
-  <i class="fa-brands fa-instagram" onclick="window.open('https://instagram.com/ft.abh1i')"></i>  
-</div>  <!-- Sections -->  <div id="about" class="section">  
-  <h2>About Me</h2>  
-  <p>I am Abhi, a curious learner who is exploring web development and building projects step by step. I enjoy creating websites and experimenting with different ideas to see how they actually work in real time.  
-Right now, I am learning web development and often use AI tools to help me write and understand code better. I focus on learning by doing, rather than just theory, and I try to improve with every project I build.  
-I am not perfect at coding yet, but I am consistent in learning and improving. I like turning simple ideas into working websites and slowly upgrading them as I gain more understanding.</p>  
-</div>  <div id="projects" class="section">  
-  <h2>Projects</h2>  
-  <p>akele log ke kiye special website.
-https://abhii-143.vercel.app/</p>  
-</div>  <div id="contact" class="section">  
-  <h2>Email</h2>  
-  <p>abhijeetshrivastava132@gmail.com</p>  
-</div>  <script>  
-let text = `ni hao fine shytt  
-explore my work`;  
-let i = 0;  
-  
-function typeEffect() {  
-  if (i < text.length) {  
-    document.getElementById("typing").innerHTML =  
-      text.substring(0, i+1);  
-    i++;  
-    setTimeout(typeEffect, 60);  
-  } else {  
-    document.getElementById("navbar").classList.add("show-navbar");  
-    document.getElementById("icons").classList.add("show-icons");  
-  }  
-}  
-typeEffect();  
-  
-function showSection(id) {  
-  document.getElementById("typing").style.display = "none";  
-  document.getElementById("icons").style.display = "none";  
-  
-  document.querySelectorAll(".section").forEach(sec => {  
-    sec.classList.remove("show");  
-  });  
-  
-  document.getElementById(id).classList.add("show");  
-}  
-  
-function goHome() {  
-  document.querySelectorAll(".section").forEach(sec => {  
-    sec.classList.remove("show");  
-  });  
-  
-  document.getElementById("typing").style.display = "block";  
-  document.getElementById("icons").style.display = "block";  
-}  
-</script>  </body>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhii Portfolio</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:#0a0a0a;
+  color:#eaeaea;
+  font-family:"Courier New", monospace;
+  overflow:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+  position:absolute;
+  top:-80px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  transition:0.8s;
+}
+.show-navbar{top:25px;}
+
+.nav-box{
+  display:flex;
+  gap:25px;
+  padding:10px 25px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(12px);
+}
+
+.nav-box a{
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
+}
+.nav-box a:hover{color:crimson;}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+#typing{
+  font-size:26px;
+  line-height:1.4;
+}
+
+/* CURSOR */
+.cursor{
+  display:inline-block;
+  width:2px;
+  height:1em;
+  background:#fff;
+  margin-left:4px;
+  animation:blink 1s infinite;
+}
+@keyframes blink{50%{opacity:0;}}
+
+/* ICONS */
+.icons{
+  position:absolute;
+  bottom:25px;
+  width:100%;
+  text-align:center;
+  opacity:0;
+  transition:1.5s;
+}
+.show-icons{opacity:1;}
+.icons i{
+  margin:0 12px;
+  font-size:20px;
+  color:#888;
+}
+.icons i:hover{color:crimson;}
+
+/* SECTIONS */
+.section{
+  display:none;
+  position:absolute;
+  top:20%;
+  width:100%;
+  text-align:center;
+  padding:0 30px; /* 👈 side gap */
+}
+.section.show{display:block;}
+
+.section h2{
+  font-size:28px;
+  margin-bottom:25px; /* 👈 gap between title & text */
+}
+
+/* ABOUT TEXT */
+#about-text{
+  font-size:16px;
+  line-height:1.6;
+  max-width:500px;
+  margin:auto;
+}
+
+/* CONTACT */
+.contact-form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:260px;
+  margin:20px auto;
+}
+.contact-form input,
+.contact-form textarea{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:transparent;
+  color:white;
+}
+.contact-form button{
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:crimson;
+  color:white;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+}
+.popup.show{
+  opacity:1;
+  pointer-events:auto;
+}
+.popup-box{
+  background:#111;
+  padding:25px;
+  border-radius:12px;
+  text-align:center;
+}
+.popup-box button{
+  margin-top:15px;
+  padding:8px 18px;
+  border:none;
+  border-radius:8px;
+  background:crimson;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar" id="navbar">
+  <div class="nav-box">
+    <a onclick="goHome()">Home</a>
+    <a onclick="showSection('about')">About</a>
+    <a onclick="showSection('projects')">Projects</a>
+    <a onclick="showSection('contact')">Contact</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div id="typing"></div>
+</div>
+
+<div class="icons" id="icons">
+  <i class="fa-brands fa-instagram" onclick="openLink('https://instagram.com/ft.abh1i')"></i>
+  <i class="fa-brands fa-whatsapp" onclick="openLink('https://wa.me/919631192011')"></i>
+  <i class="fa-brands fa-snapchat" onclick="openLink('https://snapchat.com/x.idfc')"></i>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="section">
+  <h2>About Me</h2>
+  <p id="about-text"></p>
+</div>
+
+<div id="projects" class="section">
+  <h2>Projects</h2>
+  <p>Coming soon...</p>
+</div>
+
+<div id="contact" class="section">
+  <h2>Contact Me</h2>
+  <form id="contact-form" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Project Details" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<div id="popup" class="popup">
+  <div class="popup-box">
+    <h2>Thanks for contacting</h2>
+    <button onclick="goHomeFromPopup()">Home</button>
+  </div>
+</div>
+
+<script>
+// HERO typing
+let text="Hi, I'm Abhii\nI design websites";
+let i=0;
+
+function typeEffect(){
+  let display=text.substring(0,i+1);
+  i++;
+  display=display.replace(/\n/g,"<br>");
+  display=display.replace("Abhii","<span style='color: crimson;'>Abhii</span>");
+
+  document.getElementById("typing").innerHTML=
+    display+"<span class='cursor'></span>";
+
+  if(i<text.length){
+    setTimeout(typeEffect,90);
+  } else {
+    document.getElementById("navbar").classList.add("show-navbar");
+    document.getElementById("icons").classList.add("show-icons");
+  }
+}
+typeEffect();
+
+// ABOUT typing
+let aboutText=`Hey, I'm Abhii.
+I turn ideas into clean, aesthetic websites.
+No overdesign, no mess — just simple and smooth.
+Learning every day, building non-stop.`;
+
+let j=0;
+
+function typeAbout(){
+  let display=aboutText.substring(0,j+1);
+  j++;
+
+  display=display.replace(/\n/g,"<br>");
+
+  document.getElementById("about-text").innerHTML=
+    display+"<span class='cursor'></span>";
+
+  if(j<aboutText.length){
+    setTimeout(typeAbout,40);
+  }
+}
+
+// navigation
+function showSection(id){
+  document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("show"));
+  document.querySelector(".hero").style.display="none";
+  document.getElementById("icons").style.display="none";
+
+  document.getElementById(id).classList.add("show");
+
+  if(id==="about"){
+    j=0;
+    typeAbout(); // 👈 trigger typing
+  }
+}
+
+function goHome(){
+  document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("show"));
+  document.querySelector(".hero").style.display="flex";
+  document.getElementById("icons").style.display="block";
+}
+
+function openLink(url){
+  window.open(url,"_blank");
+}
+
+// form
+const form=document.getElementById("contact-form");
+
+form.addEventListener("submit", async function(e){
+  e.preventDefault();
+  const data=new FormData(form);
+
+  try{
+    const res=await fetch("https://formspree.io/f/xyklvzld",{
+      method:"POST",
+      body:data,
+      headers:{'Accept':'application/json'}
+    });
+
+    if(res.ok){
+      form.reset();
+      document.getElementById("popup").classList.add("show");
+    }
+  }catch{
+    alert("Error");
+  }
+});
+
+function goHomeFromPopup(){
+  document.getElementById("popup").classList.remove("show");
+  goHome();
+}
+</script>
+
+</body>
 </html>
