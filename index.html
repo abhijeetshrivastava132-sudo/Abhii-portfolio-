@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abhii Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Abhii | Web Developer & UI Designer</title>
+<meta name="description" content="Abhii's portfolio — web developer and UI designer building clean, modern websites.">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-/* 🔥 BLUE BLINK/OUTLINE HATAYA - Added outline:none and -webkit-tap-highlight-color */
 body{
   background:#0a0a0a;
   color:#eaeaea;
@@ -18,183 +23,733 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
-/* 🔥 BLUE BLINK/OUTLINE HATAYA - Global */
-*:focus{
+*:focus,
+*:focus-visible,
+*:active,
+button:focus,
+a:focus,
+div:focus,
+[onclick]{
   outline:none !important;
+  box-shadow:none !important;
 }
 
-*:focus-visible{
-  outline:none !important;
-}
-
-a, button, div, input, textarea, .menu-item, .project-card, .social-card, .info-card, .premium-card{
+a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-card, [onclick]{
   -webkit-tap-highlight-color:transparent;
   outline:none;
 }
 
-a:focus, button:focus, div:focus, input:focus, textarea:focus{
-  outline:none;
+.back-btn{display:none;}
+.back-btn-inline{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,0,60,0.3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  color:#aaa;
+  font-size:16px;
+  transition:0.3s;
+  padding:0;
+}
+.back-btn-inline:hover{
+  color:crimson;
+  background:rgba(255,0,60,0.1);
+  border-color:rgba(255,0,60,0.6);
+  transform:scale(1.05);
 }
 
-.back-btn{display:none;}
-.back-btn-inline{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.06);backdrop-filter:blur(16px);border:1px solid rgba(255,0,60,0.3);display:flex;justify-content:center;align-items:center;cursor:pointer;color:#aaa;font-size:16px;box-shadow:0 0 30px rgba(255,0,60,0.08);transition:0.3s;padding:0;margin-top:5px;outline:none;}
-.back-btn-inline:hover{color:crimson;background:rgba(255,0,60,0.1);border-color:rgba(255,0,60,0.6);transform:scale(1.1);}
-.navbar{position:absolute;top:-80px;width:100%;display:flex;justify-content:center;transition:0.8s;z-index:50;}
+.navbar{
+  position:absolute;
+  top:-80px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  transition:0.8s;
+  z-index:50;
+}
 .show-navbar{top:25px;}
-.nav-box{display:flex;gap:25px;padding:12px 30px;border-radius:40px;background:rgba(255,255,255,0.06);backdrop-filter:blur(16px);box-shadow:0 0 30px rgba(255,0,60,0.08);border:1px solid crimson;}
-.nav-box a{color:#aaa;text-decoration:none;font-size:14px;cursor:pointer;transition:0.3s;display:flex;align-items:center;gap:8px;outline:none;}
+.nav-box{
+  display:flex;
+  gap:25px;
+  padding:12px 30px;
+  border-radius:40px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(16px);
+  box-shadow:0 0 30px rgba(255,0,60,0.08);
+  border:1px solid crimson;
+  justify-content:center;
+  align-items:center;
+}
+.nav-box a{
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
+  cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  outline:none;
+}
 .nav-box a:hover{color:crimson;}
-.menu-dropdown{position:fixed;top:70px;right:30px;background:rgba(20,20,20,0.95);backdrop-filter:blur(16px);border:1px solid rgba(255,0,60,0.3);border-radius:15px;padding:50px 0 0 0;width:280px;opacity:0;pointer-events:none;transition:0.3s;box-shadow:0 0 30px rgba(255,0,60,0.08);z-index:200;max-height:500px;overflow-y:auto;}
-.menu-dropdown.show{opacity:1;pointer-events:auto;}
-.menu-header-top{position:absolute;top:0;left:0;right:0;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(255,0,60,0.03);border-radius:15px 15px 0 0;}
-.menu-header-top h3{font-size:14px;color:#aaa;font-weight:600;margin:0;}
-.menu-close{background:none;border:none;color:#aaa;cursor:pointer;font-size:18px;transition:0.3s;z-index:301;display:flex;align-items:center;justify-content:center;padding:0;outline:none;}
-.menu-close:hover{color:crimson;transform:rotate(90deg);}
-.menu-item{border-bottom:1px solid rgba(255,255,255,0.05);}
+
+/* MENU DROPDOWN - MOBILE FRIENDLY (CENTER + THODA NEECHE) */
+.menu-dropdown{
+  position:fixed;
+  top:75px;
+  right:30px;
+  background:rgba(20,20,20,0.98);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,0,60,0.3);
+  border-radius:20px;
+  padding:50px 0 0 0;
+  width:280px;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s ease;
+  z-index:1000;
+  max-height:450px;
+  overflow-y:auto;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* PHONE KE LIYE - NEECHE AUR CENTER */
+@media (max-width: 600px) {
+  .menu-dropdown{
+    top:80px;
+    right:auto;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    max-width:320px;
+  }
+  .menu-dropdown.show{
+    transform:translateX(-50%);
+  }
+}
+
+.menu-dropdown.show{
+  opacity:1;
+  pointer-events:auto;
+}
+.menu-header-top{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:rgba(255,0,60,0.03);
+  border-radius:20px 20px 0 0;
+}
+.menu-header-top h3{
+  font-size:14px;
+  color:#aaa;
+  font-weight:600;
+  margin:0;
+}
+.menu-close{
+  background:none;
+  border:none;
+  color:#aaa;
+  cursor:pointer;
+  font-size:18px;
+  transition:0.3s;
+  padding:0;
+  outline:none;
+}
+.menu-close:hover{
+  color:crimson;
+  transform:rotate(90deg);
+}
+.menu-item{
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
 .menu-item:last-child{border-bottom:none;}
-.menu-header{padding:15px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:0.3s;user-select:none;outline:none;}
+.menu-header{
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  transition:0.3s;
+  outline:none;
+}
 .menu-header:hover{background:rgba(255,0,60,0.05);}
-.menu-header h3{font-size:13px;color:#aaa;text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:8px;margin:0;}
+.menu-header h3{
+  font-size:13px;
+  color:#aaa;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:0;
+}
 .menu-header i:last-child{font-size:12px;transition:0.3s;}
 .menu-item.active .menu-header i:last-child{transform:rotate(180deg);}
-.menu-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+.menu-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.3s ease;
+}
 .menu-content.show{max-height:300px;}
-.social-links{display:flex;flex-direction:column;gap:0;padding:10px 0;}
-.social-links a{display:flex;align-items:center;gap:12px;color:#aaa;text-decoration:none;font-size:13px;padding:10px 20px;transition:0.3s;outline:none;}
-.social-links a:hover{color:crimson;background:rgba(255,0,60,0.1);}
+.social-links{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding:10px 0;
+}
+.social-links a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#aaa;
+  text-decoration:none;
+  font-size:13px;
+  padding:10px 20px;
+  transition:0.3s;
+  outline:none;
+}
+.social-links a:hover{
+  color:crimson;
+  background:rgba(255,0,60,0.1);
+}
 .social-links i{font-size:16px;width:20px;}
-.email-section a{display:flex;align-items:center;gap:12px;color:crimson;text-decoration:none;font-size:13px;padding:10px 20px;transition:0.3s;word-break:break-all;outline:none;}
-.email-section a:hover{color:#ff4d7d;background:rgba(255,0,60,0.1);}
-.email-section i{font-size:16px;width:20px;}
-.email-content{padding:10px 0;}
+.email-section a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:crimson;
+  text-decoration:none;
+  font-size:13px;
+  padding:10px 20px;
+  transition:0.3s;
+  outline:none;
+}
+.email-section a:hover{
+  color:#ff4d7d;
+  background:rgba(255,0,60,0.1);
+}
 .datetime-content{padding:15px 20px;}
-.datetime-section{border-radius:8px;background:rgba(255,0,60,0.05);padding:10px;}
-.datetime-section p{color:#ccc;margin:8px 0;display:flex;align-items:center;gap:10px;font-size:13px;}
+.datetime-section{
+  border-radius:8px;
+  background:rgba(255,0,60,0.05);
+  padding:10px;
+}
+.datetime-section p{
+  color:#ccc;
+  margin:8px 0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
+}
 .datetime-section i{font-size:14px;color:crimson;width:16px;}
-.hero{height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;}
-#typing{font-size:30px;line-height:1.5;letter-spacing:0.5px;font-family:'Courier New',Monospace;}
-.cursor{display:inline-block;width:2px;height:1em;background:#fff;margin-left:4px;animation:blink 1s infinite;}
-@keyframes blink{50%{opacity:0;}}
-.icons{position:absolute;bottom:30px;width:100%;text-align:center;opacity:0;transition:1.5s;display:none;}
-.show-icons{opacity:1;}
-.icons i{margin:0 14px;font-size:22px;color:#777;cursor:pointer;transition:0.3s;outline:none;}
-.icons i:hover{color:crimson;transform:translateY(-3px);}
-.section{display:none;position:absolute;top:12%;width:100%;text-align:center;padding:20px 30px;overflow-y:auto;max-height:80vh;}
+
+/* HERO SECTION */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+}
+.hero-content{z-index:2;}
+
+/* STATUS BADGE */
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:transparent;
+  border:1px solid rgba(255,0,60,0.5);
+  border-radius:50px;
+  padding:5px 16px;
+  font-size:12px;
+  color:#ffffff;
+  margin-bottom:25px;
+  letter-spacing:0.5px;
+}
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#00ff88;
+  animation:pulse 2s infinite;
+  display:inline-block;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+
+#typing{
+  font-size:52px;
+  line-height:1.3;
+  font-weight:600;
+  letter-spacing:-0.5px;
+  font-family:'Poppins',sans-serif;
+  min-height:90px;
+}
+@media (max-width:600px){#typing{font-size:34px;min-height:70px;}}
+.cursor{
+  display:inline-block;
+  width:3px;
+  height:1.1em;
+  background:crimson;
+  margin-left:4px;
+  animation:blink 1s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+.hero-sub{
+  font-size:13px;
+  color:#888;
+  margin-top:10px;
+  letter-spacing:0.5px;
+  white-space:nowrap;
+}
+@media (max-width:550px){
+  .hero-sub{font-size:12px;white-space:normal;}
+}
+
+.hero-buttons{
+  display:flex;
+  gap:20px;
+  margin-top:35px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn-primary{
+  background:crimson;
+  color:white;
+  padding:12px 32px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:500;
+  font-size:15px;
+  transition:0.3s;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  border:none;
+  outline:none;
+}
+.btn-primary:hover{
+  background:#ff1a4d;
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(255,0,60,0.3);
+}
+.btn-outline{
+  background:transparent;
+  color:#eaeaea;
+  padding:12px 32px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:500;
+  font-size:15px;
+  transition:0.3s;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(255,255,255,0.2);
+  cursor:pointer;
+  outline:none;
+}
+.btn-outline:hover{
+  border-color:crimson;
+  color:crimson;
+  transform:translateY(-2px);
+}
+
+.hero-social-icons{display:none;}
+
+/* SECTIONS */
+.section{
+  display:none;
+  position:absolute;
+  top:12%;
+  left:0;
+  right:0;
+  width:100%;
+  text-align:center;
+  padding:20px 30px;
+  overflow-y:auto;
+  max-height:80vh;
+  z-index:10;
+}
 .section.show{display:block;}
-.section h2{font-size:32px;margin-bottom:0;margin:0;}
-.section-header{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:30px;}
+.section h2{font-size:32px;margin-bottom:0;}
+.section-header{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin-bottom:30px;
+}
 .about-container{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:20px;}
-.about-main-card{background:rgba(20,20,20,0.95);backdrop-filter:blur(20px);border:1px solid rgba(255,0,60,0.15);border-radius:20px;padding:40px;text-align:left;transition:0.3s;position:relative;overflow:hidden;outline:none;}
-.about-main-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,crimson,transparent);}
-.about-main-card:hover{border-color:rgba(255,0,60,0.4);box-shadow:0 10px 40px rgba(255,0,60,0.1);}
-.about-label{font-size:11px;text-transform:uppercase;letter-spacing:3px;color:#666;margin-bottom:15px;font-weight:500;}
-.about-title{font-size:28px;font-weight:600;color:#fff;line-height:1.4;margin-bottom:15px;}
+.about-main-card{
+  background:rgba(20,20,20,0.95);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,0,60,0.15);
+  border-radius:20px;
+  padding:40px;
+  text-align:left;
+  transition:0.3s;
+  position:relative;
+  overflow:hidden;
+}
+.about-main-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,crimson,transparent);
+}
+.about-main-card:hover{
+  border-color:rgba(255,0,60,0.4);
+  box-shadow:0 10px 40px rgba(255,0,60,0.1);
+}
+.about-label{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:#666;
+  margin-bottom:15px;
+  font-weight:500;
+}
+.about-title{
+  font-size:28px;
+  font-weight:600;
+  color:#fff;
+  line-height:1.4;
+  margin-bottom:15px;
+}
 .about-title span{color:crimson;}
-.about-description{color:#999;font-size:14px;line-height:1.8;margin-bottom:25px;font-weight:300;}
-.availability-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:25px;background:rgba(255,0,60,0.08);border:1px solid rgba(255,0,60,0.3);color:crimson;font-size:12px;font-weight:500;margin-bottom:25px;transition:0.3s;}
-.availability-badge:hover{background:rgba(255,0,60,0.15);transform:translateY(-2px);}
-.availability-dot{width:8px;height:8px;border-radius:50%;background:#00ff88;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
-.about-social-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
-.social-card{background:rgba(20,20,20,0.95);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:15px;padding:25px;text-align:left;cursor:pointer;transition:0.3s;text-decoration:none;color:#aaa;display:flex;align-items:center;gap:15px;outline:none;}
-.social-card:hover{border-color:rgba(255,0,60,0.4);transform:translateY(-3px);box-shadow:0 10px 30px rgba(255,0,60,0.1);color:#fff;}
+.about-description{
+  color:#999;
+  font-size:14px;
+  line-height:1.8;
+  margin-bottom:25px;
+  font-weight:300;
+}
+.availability-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 20px;
+  border-radius:25px;
+  background:rgba(255,0,60,0.08);
+  border:1px solid rgba(255,0,60,0.3);
+  color:crimson;
+  font-size:12px;
+  font-weight:500;
+  margin-bottom:25px;
+}
+.availability-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#00ff88;
+  animation:pulse 2s infinite;
+}
+.about-social-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+.social-card{
+  background:rgba(20,20,20,0.95);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:15px;
+  padding:25px;
+  text-align:left;
+  cursor:pointer;
+  transition:0.3s;
+  text-decoration:none;
+  color:#aaa;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  outline:none;
+}
+.social-card:hover{
+  border-color:rgba(255,0,60,0.4);
+  transform:translateY(-3px);
+  color:#fff;
+}
 .social-card i{font-size:24px;color:crimson;width:30px;}
 .social-card-content h4{font-size:14px;color:#fff;font-weight:500;margin-bottom:3px;}
-.social-card-content p{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;}
-.about-info-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;}
-.info-card{background:rgba(20,20,20,0.95);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:15px;padding:25px 20px;text-align:center;transition:0.3s;cursor:pointer;outline:none;}
-.info-card:hover{border-color:rgba(255,0,60,0.4);transform:translateY(-3px);box-shadow:0 10px 30px rgba(255,0,60,0.1);}
+.social-card-content p{font-size:11px;color:#666;text-transform:uppercase;}
+.about-info-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+}
+.info-card{
+  background:rgba(20,20,20,0.95);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:15px;
+  padding:25px 20px;
+  text-align:center;
+  transition:0.3s;
+  cursor:pointer;
+  outline:none;
+}
+.info-card:hover{
+  border-color:rgba(255,0,60,0.4);
+  transform:translateY(-3px);
+}
 .info-card .info-icon{font-size:32px;margin-bottom:10px;}
 .info-card h4{font-size:13px;color:#fff;font-weight:500;margin-bottom:5px;}
-.info-card p{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;}
-.premium-card{background:linear-gradient(135deg,rgba(255,0,60,0.1),rgba(255,0,60,0.05));border:1px solid rgba(255,0,60,0.3);border-radius:15px;padding:25px;text-align:center;transition:0.3s;cursor:pointer;outline:none;}
-.premium-card:hover{border-color:crimson;transform:translateY(-3px);box-shadow:0 15px 40px rgba(255,0,60,0.2);}
-.premium-card h4{color:crimson;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;}
+.info-card p{font-size:11px;color:#666;text-transform:uppercase;}
+.premium-card{
+  background:linear-gradient(135deg,rgba(255,0,60,0.1),rgba(255,0,60,0.05));
+  border:1px solid rgba(255,0,60,0.3);
+  border-radius:15px;
+  padding:25px;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+  outline:none;
+}
+.premium-card:hover{
+  border-color:crimson;
+  transform:translateY(-3px);
+}
+.premium-card h4{
+  color:crimson;
+  font-size:14px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:5px;
+}
 .premium-card p{color:#999;font-size:12px;}
-.projects-container{max-width:600px;margin:0 auto;}
-.project-card{background:rgba(20,20,20,0.95);backdrop-filter:blur(20px);border:1px solid rgba(255,0,60,0.2);border-radius:15px;margin-bottom:20px;transition:0.3s;overflow:hidden;outline:none;}
-.project-card:hover{border-color:rgba(255,0,60,0.5);box-shadow:0 0 30px rgba(255,0,60,0.1);}
-.project-header{padding:18px 25px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:0.3s;user-select:none;outline:none;}
-.project-header:hover{background:rgba(255,0,60,0.05);}
-.project-info{display:flex;align-items:center;gap:12px;}
-.project-icon{font-size:20px;color:crimson;width:24px;}
-.project-title-area h3{font-size:15px;color:#eaeaea;font-weight:500;text-align:left;margin:0;}
-.project-meta{display:flex;gap:8px;margin-top:5px;}
-.tech-tag{font-size:10px;padding:3px 10px;border-radius:20px;background:rgba(255,0,60,0.1);color:crimson;border:1px solid rgba(255,0,60,0.3);}
-.project-arrow{color:#aaa;font-size:14px;transition:0.3s;}
-.project-card.active .project-arrow{transform:rotate(180deg);color:crimson;}
-.project-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease;background:rgba(255,255,255,0.02);}
-.project-content.show{max-height:500px;}
-.project-details{padding:20px 25px;border-top:1px solid rgba(255,255,255,0.05);}
-.project-description{color:#aaa;font-size:13px;line-height:1.8;text-align:left;margin-bottom:20px;}
-.project-links{display:flex;gap:15px;flex-wrap:wrap;}
-.project-link-btn{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:10px;text-decoration:none;font-size:13px;transition:0.3s;border:1px solid rgba(255,0,60,0.3);outline:none;}
-.live-link{background:crimson;color:white;}
-.live-link:hover{background:#ff1a4d;transform:translateY(-2px);box-shadow:0 5px 20px rgba(255,0,60,0.3);}
-.github-link{background:transparent;color:#aaa;}
-.github-link:hover{border-color:crimson;color:crimson;transform:translateY(-2px);}
-/* 🔥 CONTACT FORM CHANGES - Chhota kiya, slide hataya */
+
+/* PROJECTS SECTION - FIXED */
+.projects-container{
+  max-width:650px;
+  margin:0 auto;
+  padding:0 15px;
+}
+.project-card{
+  background:rgba(20,20,20,0.95);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(255,0,60,0.2);
+  border-radius:16px;
+  margin-bottom:20px;
+  transition:0.3s;
+  overflow:hidden;
+}
+.project-card:hover{
+  border-color:rgba(255,0,60,0.5);
+  box-shadow:0 0 30px rgba(255,0,60,0.1);
+}
+.project-header{
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  transition:0.3s;
+  outline:none;
+}
+.project-header:hover{
+  background:rgba(255,0,60,0.05);
+}
+.project-info{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex:1;
+}
+.project-icon{
+  font-size:22px;
+  color:crimson;
+  width:32px;
+  text-align:center;
+}
+.project-title-area{
+  flex:1;
+  text-align:left;
+}
+.project-title-area h3{
+  font-size:16px;
+  color:#eaeaea;
+  font-weight:500;
+  margin:0 0 6px 0;
+}
+.project-meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.tech-tag{
+  font-size:10px;
+  padding:3px 10px;
+  border-radius:20px;
+  background:rgba(255,0,60,0.1);
+  color:crimson;
+  border:1px solid rgba(255,0,60,0.3);
+  display:inline-block;
+}
+.project-arrow{
+  color:#aaa;
+  font-size:14px;
+  transition:0.3s;
+  margin-left:10px;
+}
+.project-card.active .project-arrow{
+  transform:rotate(180deg);
+  color:crimson;
+}
+.project-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.35s ease;
+  background:rgba(255,255,255,0.02);
+}
+.project-content.show{
+  max-height:350px;
+}
+.project-details{
+  padding:20px 22px;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.project-description{
+  color:#aaa;
+  font-size:13px;
+  line-height:1.7;
+  text-align:left;
+  margin-bottom:18px;
+}
+.project-links{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.project-link-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:13px;
+  transition:0.3s;
+  border:1px solid rgba(255,0,60,0.3);
+  outline:none;
+  cursor:pointer;
+}
+.live-link{
+  background:crimson;
+  color:white;
+}
+.live-link:hover{
+  background:#ff1a4d;
+  transform:translateY(-2px);
+}
+.github-link{
+  background:transparent;
+  color:#aaa;
+}
+.github-link:hover{
+  border-color:crimson;
+  color:crimson;
+  transform:translateY(-2px);
+}
+
 .contact-form{
   display:flex;
   flex-direction:column;
-  gap:14px;
-  width:300px;
+  gap:16px;
+  width:380px;
   margin:20px auto;
   max-width:90%;
 }
 .contact-form input,
 .contact-form textarea{
-  padding:12px;
-  border-radius:10px;
+  padding:14px 16px;
+  border-radius:12px;
   border:1px solid rgba(255,255,255,0.08);
   background:rgba(20,20,20,0.95);
-  backdrop-filter:blur(20px);
   color:white;
   outline:none;
   transition:0.3s;
   font-family:'Poppins',sans-serif;
-  font-size:13px;
-}
-.contact-form textarea{
-  min-height:120px;
-  resize:none;
-  overflow-y:auto;
+  font-size:14px;
 }
 .contact-form input:focus,
 .contact-form textarea:focus{
-  border:1px solid crimson;
+  border-color:crimson;
   box-shadow:0 0 15px rgba(255,0,60,0.2);
 }
+.contact-form textarea{
+  min-height:130px;
+  resize:vertical;
+}
 .contact-form button{
-  padding:12px 25px;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:crimson;
+  color:white;
+  cursor:pointer;
+  font-weight:600;
+  font-size:14px;
+  transition:0.3s;
+  outline:none;
+}
+.contact-form button:hover{
+  background:#ff1a4d;
+  transform:scale(1.02);
+}
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  z-index:2000;
+}
+.popup.show{opacity:1;pointer-events:auto;}
+.popup-box{
+  background:#1a1a1a;
+  padding:35px;
+  border-radius:20px;
+  text-align:center;
+  border:1px solid rgba(255,0,60,0.3);
+}
+.popup-box h2{color:crimson;margin-bottom:10px;}
+.popup-box button{
+  margin-top:15px;
+  padding:12px 30px;
   border:none;
   border-radius:10px;
   background:crimson;
   color:white;
   cursor:pointer;
-  transition:0.3s;
   font-weight:600;
-  font-size:13px;
-  letter-spacing:1px;
-  width:60%;
-  margin:0 auto;
   outline:none;
 }
-.contact-form button:hover{
-  transform:scale(1.02);
-  box-shadow:0 5px 25px rgba(255,0,60,0.3);
-}
-
-.popup{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;opacity:0;pointer-events:none;transition:0.3s;z-index:300;}
-.popup.show{opacity:1;pointer-events:auto;}
-.popup-box{background:#1a1a1a;padding:35px;border-radius:20px;text-align:center;box-shadow:0 0 50px rgba(255,0,60,0.2);border:1px solid rgba(255,0,60,0.2);}
-.popup-box h2{margin-bottom:10px;font-weight:600;}
-.popup-box button{margin-top:15px;padding:12px 30px;border:none;border-radius:10px;background:crimson;color:white;cursor:pointer;font-weight:600;transition:0.3s;outline:none;}
-.popup-box button:hover{background:#ff1a4d;transform:scale(1.05);}
 .section::-webkit-scrollbar{width:6px;}
-.section::-webkit-scrollbar-track{background:transparent;}
 .section::-webkit-scrollbar-thumb{background:rgba(255,0,60,0.3);border-radius:10px;}
-.section::-webkit-scrollbar-thumb:hover{background:rgba(255,0,60,0.5);}
 </style>
 </head>
 <body>
@@ -203,19 +758,14 @@ a:focus, button:focus, div:focus, input:focus, textarea:focus{
   <i class="fa-solid fa-arrow-left"></i>
 </div>
 
-<!-- 🔥 MENU DROPDOWN - LinkedIn aur GitHub ADD KIYA -->
 <div class="menu-dropdown" id="menuDropdown">
   <div class="menu-header-top">
-    <h3>Menu</h3>
-    <button class="menu-close" onclick="toggleMenu()" title="Close">
-      <i class="fa-solid fa-times"></i>
-    </button>
+    <h3><i class="fa-regular fa-compass"></i> Menu</h3>
+    <button class="menu-close" id="menuCloseBtn"><i class="fa-solid fa-xmark"></i></button>
   </div>
-
-  <!-- Connect Section -->
   <div class="menu-item" id="connectItem">
     <div class="menu-header" onclick="toggleMenuSection('connect')">
-      <h3><i class="fa-solid fa-link"></i>Connect</h3>
+      <h3><i class="fa-solid fa-link"></i> Connect</h3>
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <div class="menu-content" id="connectContent">
@@ -223,38 +773,32 @@ a:focus, button:focus, div:focus, input:focus, textarea:focus{
         <a href="https://instagram.com/ft.abh1i" target="_blank"><i class="fa-brands fa-instagram"></i>Instagram</a>
         <a href="https://wa.me/919631192011" target="_blank"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
         <a href="https://snapchat.com/add/x.idfc" target="_blank"><i class="fa-brands fa-snapchat"></i>Snapchat</a>
-        <!-- 🔥🔥🔥 LINKEDIN ADD KIYA YAHAN 🔥🔥🔥 -->
-        <a href= "https://www.linkedin.com/in/abhijeet-shrivastava28?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
-        <!-- 🔥🔥🔥 GITHUB ADD KIYA YAHAN 🔥🔥🔥 -->
-        <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a>
+        <a href="https://linkedin.com/in/abhijeet-shrivastava28" target="_blank"><i class="fa-brands fa-linkedin-in"></i>LinkedIn</a>
+        <a href="https://github.com/abhii" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a>
       </div>
     </div>
   </div>
-
-  <!-- Email Section -->
   <div class="menu-item" id="emailItem">
     <div class="menu-header" onclick="toggleMenuSection('email')">
-      <h3><i class="fa-solid fa-envelope"></i>Email</h3>
+      <h3><i class="fa-solid fa-envelope"></i> Email</h3>
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <div class="menu-content" id="emailContent">
-      <div class="email-content email-section">
+      <div class="email-section">
         <a href="mailto:contact@abhii.online"><i class="fa-solid fa-envelope"></i>contact@abhii.online</a>
       </div>
     </div>
   </div>
-
-  <!-- Date and Time Section -->
   <div class="menu-item" id="dateItem">
     <div class="menu-header" onclick="toggleMenuSection('datetime')">
-      <h3><i class="fa-solid fa-clock"></i>local-time</h3>
+      <h3><i class="fa-solid fa-clock"></i> Local Time</h3>
       <i class="fa-solid fa-chevron-down"></i>
     </div>
     <div class="menu-content" id="datetimeContent">
       <div class="datetime-content">
         <div class="datetime-section">
-          <p><i class="fa-solid fa-calendar"></i><span id="currentDate">--</span></p>
-          <p><i class="fa-solid fa-clock"></i><span id="currentTime">--:--:--</span></p>
+          <p><i class="fa-solid fa-calendar"></i> <span id="currentDate">--</span></p>
+          <p><i class="fa-solid fa-clock"></i> <span id="currentTime">--:--:--</span></p>
         </div>
       </div>
     </div>
@@ -263,7 +807,7 @@ a:focus, button:focus, div:focus, input:focus, textarea:focus{
 
 <div class="navbar" id="navbar">
   <div class="nav-box">
-    <a onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></a>
+    <a id="menuBtn"><i class="fa-solid fa-bars"></i></a>
     <a onclick="showSection('about')">About</a>
     <a onclick="showSection('projects')">Projects</a>
     <a onclick="showSection('contact')">Contact</a>
@@ -271,107 +815,66 @@ a:focus, button:focus, div:focus, input:focus, textarea:focus{
 </div>
 
 <div class="hero">
-  <div id="typing"></div>
+  <div class="hero-content">
+    <div class="status-badge">
+      <span class="status-dot"></span> Available for freelance
+    </div>
+    <div id="typing"></div>
+    <div class="hero-sub">Web Developer & UI Designer</div>
+    <div class="hero-buttons">
+      <a class="btn-primary" onclick="showSection('projects')">
+        <i class="fa-solid fa-arrow-right"></i> See My Work
+      </a>
+      <a class="btn-outline" onclick="showSection('contact')">
+        <i class="fa-regular fa-message"></i> Contact Me
+      </a>
+    </div>
+  </div>
 </div>
 
-<div class="icons" id="icons">
-  <i class="fa-brands fa-instagram" onclick="openLink('https://instagram.com/ft.abh1i')"></i>
-  <i class="fa-brands fa-whatsapp" onclick="openLink('https://wa.me/919631192011')"></i>
-  <i class="fa-brands fa-snapchat" onclick="openLink('https://snapchat.com/add/x.idfc')"></i>
-</div>
-
-<!-- ABOUT SECTION -->
 <div id="about" class="section">
   <div class="section-header">
     <h2>About</h2>
-    <button class="back-btn-inline" onclick="goHome()" title="Back">
-      <i class="fa-solid fa-arrow-left"></i>
-    </button>
+    <button class="back-btn-inline" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
   </div>
-  
   <div class="about-container">
-    <!-- Main Card -->
     <div class="about-main-card">
       <div class="about-label">About me</div>
-      <div class="about-title">
-        Freelance <span>designer</span> and <span>developer</span> building fast, intentional websites that actually ship.
-      </div>
-      <div class="about-description">
-        Hi, I'm Abhijeet Shrivastava. I build websites using AI tools and my own ideas. I'm still learning, but I focus on making clean and modern designs that actually look good without unnecessary complexity.
-      </div>
-      <div class="availability-badge">
-        <span class="availability-dot"></span>
-        AVAILABLE FOR WORK
-      </div>
+      <div class="about-title">Freelance <span>designer</span> and <span>developer</span> building fast, intentional websites.</div>
+      <div class="about-description">Hi, I'm Abhijeet Shrivastava. I build websites using AI tools and my own ideas. I focus on clean, modern designs that actually look good without unnecessary complexity.</div>
+      <div class="availability-badge"><span class="availability-dot"></span> AVAILABLE FOR WORK</div>
     </div>
-
-    <!-- Social Cards -->
     <div class="about-social-cards">
-      <a href="https://www.linkedin.com/in/abhijeet-shrivastava28?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="social-card">
+      <a href="https://linkedin.com/in/abhijeet-shrivastava28" target="_blank" class="social-card">
         <i class="fa-brands fa-linkedin-in"></i>
-        <div class="social-card-content">
-          <h4>LinkedIn</h4>
-          <p>Let's Connect</p>
-        </div>
+        <div class="social-card-content"><h4>LinkedIn</h4><p>Let's Connect</p></div>
       </a>
-      <a href="https://github.com" target="_blank" class="social-card">
+      <a href="https://github.com/abhii" target="_blank" class="social-card">
         <i class="fa-brands fa-github"></i>
-        <div class="social-card-content">
-          <h4>GitHub</h4>
-          <p>View Projects</p>
-        </div>
+        <div class="social-card-content"><h4>GitHub</h4><p>View Projects</p></div>
       </a>
     </div>
-
-    <!-- Info Cards -->
     <div class="about-info-cards">
-      <div class="info-card">
-        <div class="info-icon">🚀</div>
-        <h4>Fast</h4>
-        <p>Performance First</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">✨</div>
-        <h4>Clean</h4>
-        <p>Modern Design</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">💡</div>
-        <h4>Creative</h4>
-        <p>Unique Ideas</p>
-      </div>
+      <div class="info-card"><div class="info-icon">🚀</div><h4>Fast</h4><p>Performance First</p></div>
+      <div class="info-card"><div class="info-icon">✨</div><h4>Clean</h4><p>Modern Design</p></div>
+      <div class="info-card"><div class="info-icon">💡</div><h4>Creative</h4><p>Unique Ideas</p></div>
     </div>
-
-    <!-- Premium Card -->
-    <div class="premium-card">
-      <h4>Premium Version</h4>
-      <p>Custom websites with advanced features</p>
-    </div>
-
-    <!-- 🔥 QUESTIONS CARD - Ab click karne pe Contact page pe redirect hoga -->
-    <div class="premium-card" style="background:rgba(255,255,255,0.02); border-color:rgba(255,255,255,0.1);" onclick="showSection('contact')">
-      <h4 style="color:#aaa;">Questions?</h4>
-      <p>Feel free to reach out for collaborations</p>
-    </div>
+    <div class="premium-card"><h4>Premium Version</h4><p>Custom websites with advanced features</p></div>
+    <div class="premium-card" style="background:rgba(255,255,255,0.02);" onclick="showSection('contact')"><h4 style="color:#aaa;">Questions?</h4><p>Feel free to reach out</p></div>
   </div>
 </div>
 
-<!-- PROJECTS -->
 <div id="projects" class="section">
   <div class="section-header">
     <h2>Projects</h2>
-    <button class="back-btn-inline" onclick="goHome()" title="Back">
-      <i class="fa-solid fa-arrow-left"></i>
-    </button>
+    <button class="back-btn-inline" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
   </div>
-  
   <div class="projects-container">
+    <!-- PROJECT 1 - FIXED -->
     <div class="project-card" id="project1">
       <div class="project-header" onclick="toggleProject('project1')">
         <div class="project-info">
-          <div class="project-icon">
-            <i class="fa-solid fa-code"></i>
-          </div>
+          <div class="project-icon"><i class="fa-solid fa-code"></i></div>
           <div class="project-title-area">
             <h3>proposerr</h3>
             <div class="project-meta">
@@ -385,14 +888,9 @@ a:focus, button:focus, div:focus, input:focus, textarea:focus{
       </div>
       <div class="project-content">
         <div class="project-details">
-          <p class="project-description">
-            My first project. Built with clean and modern design focusing on smooth user experience and aesthetic UI. Features responsive design and interactive elements.
-          </p>
+          <p class="project-description">My first project. Clean modern design with smooth UX. Fully responsive and interactive.</p>
           <div class="project-links">
-            <a href="https://abhii-143.vercel.app/" target="_blank" class="project-link-btn live-link">
-              <i class="fa-solid fa-globe"></i>
-              Visit Site
-            </a>
+            <a href="https://abhii-143.vercel.app/" target="_blank" class="project-link-btn live-link"><i class="fa-solid fa-globe"></i>Visit Site</a>
           </div>
         </div>
       </div>
@@ -401,13 +899,12 @@ a:focus, button:focus, div:focus, input:focus, textarea:focus{
     <div class="project-card" id="project2">
       <div class="project-header" onclick="toggleProject('project2')">
         <div class="project-info">
-          <div class="project-icon">
-            <i class="fa-solid fa-paint-brush"></i>
-          </div>
+          <div class="project-icon"><i class="fa-solid fa-cart-shopping"></i></div>
           <div class="project-title-area">
-            <h3>Coming Soon</h3>
+            <h3>EcoShop UI</h3>
             <div class="project-meta">
-              <span class="tech-tag">Soon</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Tailwind</span>
             </div>
           </div>
         </div>
@@ -415,14 +912,33 @@ a:focus, button:focus, div:focus, input:focus, textarea:focus{
       </div>
       <div class="project-content">
         <div class="project-details">
-          <p class="project-description">
-            Working on something exciting! Stay tuned for more projects coming your way.
-          </p>
+          <p class="project-description">E-commerce product page with modern card design, hover effects, and responsive layout.</p>
           <div class="project-links">
-            <a href="#" class="project-link-btn github-link">
-              <i class="fa-solid fa-clock"></i>
-              Coming Soon
-            </a>
+            <a href="#" class="project-link-btn github-link" onclick="alert('Coming soon!')"><i class="fa-brands fa-github"></i>Preview Soon</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card" id="project3">
+      <div class="project-header" onclick="toggleProject('project3')">
+        <div class="project-info">
+          <div class="project-icon"><i class="fa-solid fa-robot"></i></div>
+          <div class="project-title-area">
+            <h3>AI Chat Widget</h3>
+            <div class="project-meta">
+              <span class="tech-tag">JS</span>
+              <span class="tech-tag">API</span>
+            </div>
+          </div>
+        </div>
+        <i class="fa-solid fa-chevron-down project-arrow"></i>
+      </div>
+      <div class="project-content">
+        <div class="project-details">
+          <p class="project-description">Interactive AI chat interface with smooth animations and API integration (in progress).</p>
+          <div class="project-links">
+            <a href="#" class="project-link-btn github-link" onclick="alert('Coming soon!')"><i class="fa-regular fa-clock"></i>In Development</a>
           </div>
         </div>
       </div>
@@ -430,200 +946,134 @@ a:focus, button:focus, div:focus, input:focus, textarea:focus{
   </div>
 </div>
 
-<!-- CONTACT -->
 <div id="contact" class="section">
   <div class="section-header">
     <h2>Contact</h2>
-    <button class="back-btn-inline" onclick="goHome()" title="Back">
-      <i class="fa-solid fa-arrow-left"></i>
-    </button>
+    <button class="back-btn-inline" onclick="goHome()"><i class="fa-solid fa-arrow-left"></i></button>
   </div>
   <form id="contact-form" class="contact-form">
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Project Details" required></textarea>
-    <button type="submit">Send Message</button>
+    <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+    <button type="submit">Send Message →</button>
   </form>
 </div>
 
-<!-- 🔥 POPUP - Custom message ke saath -->
-<div id="popup" class="popup">
-  <div class="popup-box">
-    <h2>message Sent!</h2>
-    <p style="color:#999; margin:10px 0;">Thanks for reaching out! I'll get back to you soon.</p>
-    <button onclick="goHomeFromPopup()">Back to Home</button>
-  </div>
-</div>
+<div id="popup" class="popup"><div class="popup-box"><h2>✨ Message Sent!</h2><p>Thanks for reaching out. I'll get back to you soon.</p><button onclick="goHomeFromPopup()">Back to Home</button></div></div>
 
 <script>
-// DATE AND TIME FUNCTION
-function updateDateTime() {
-  const now = new Date();
-  const day = String(now.getDate()).padStart(2, '0');
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const year = now.getFullYear();
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-
-  const dateString = `${day}/${month}/${year}`;
-  const timeString = `${hours}:${minutes}:${seconds}`;
-
-  const dateEl = document.getElementById('currentDate');
-  const timeEl = document.getElementById('currentTime');
-
-  if (dateEl) dateEl.textContent = dateString;
-  if (timeEl) timeEl.textContent = timeString;
+function updateDateTime(){
+  const now=new Date();
+  const dateEl=document.getElementById('currentDate');
+  const timeEl=document.getElementById('currentTime');
+  if(dateEl) dateEl.textContent=now.toLocaleDateString('en-GB');
+  if(timeEl) timeEl.textContent=now.toLocaleTimeString('en-GB');
 }
-
 updateDateTime();
-setInterval(updateDateTime, 1000);
+setInterval(updateDateTime,1000);
 
-const roles = [
-  "I build websites",
-  "clean UI",
-  "smooth UX"
-];
+// TYPING ANIMATION
+const fullTexts=["Hi, I'm Abhii","I build websites","Clean UI & smooth UX"];
+let textIndex=0, charIndex=0, isDeletingText=false;
 
-let roleIndex = 0;
-let charIndex = 0;
-let deleting = false;
-
-function typeEffect() {
-  let current = roles[roleIndex];
-  let text = current.substring(0, charIndex);
-
-  document.getElementById("typing").innerHTML =
-    `Hi, I'm <span style="color:crimson;">Abhii</span><br>` +
-    text +
-    `<span class="cursor"></span>`;
-
-  if (!deleting && charIndex < current.length) {
+function animateTyping(){
+  const currentFull=fullTexts[textIndex];
+  let displayText=currentFull.substring(0,charIndex);
+  
+  if(textIndex===0 && charIndex>10 && !isDeletingText){
+    const before="Hi, I'm ";
+    const namePart=displayText.replace(before,'');
+    displayText=before+'<span style="color:crimson;">'+namePart+'</span>';
+  }
+  
+  document.getElementById("typing").innerHTML=displayText+'<span class="cursor"></span>';
+  
+  if(!isDeletingText && charIndex<currentFull.length){
     charIndex++;
-    setTimeout(typeEffect, 70);
-  }
-  else if (deleting && charIndex > 0) {
+    setTimeout(animateTyping,70);
+  } else if(isDeletingText && charIndex>0){
     charIndex--;
-    setTimeout(typeEffect, 35);
-  }
-  else {
-    deleting = !deleting;
-    if (!deleting) roleIndex = (roleIndex + 1) % roles.length;
-    setTimeout(typeEffect, deleting ? 1200 : 400);
-  }
-
-  document.getElementById("navbar").classList.add("show-navbar");
-  document.getElementById("icons").classList.add("show-icons");
-}
-typeEffect();
-
-function toggleMenuSection(section){
-  const item = document.getElementById(section + 'Item');
-  const content = document.getElementById(section + 'Content');
-  if(item) item.classList.toggle('active');
-  if(content) content.classList.toggle('show');
-}
-
-function toggleProject(projectId) {
-  const project = document.getElementById(projectId);
-  const content = project.querySelector('.project-content');
-  
-  document.querySelectorAll('.project-card').forEach(card => {
-    if (card.id !== projectId) {
-      card.classList.remove('active');
-      card.querySelector('.project-content').classList.remove('show');
+    setTimeout(animateTyping,35);
+  } else {
+    isDeletingText=!isDeletingText;
+    if(!isDeletingText){
+      textIndex=(textIndex+1)%fullTexts.length;
+      setTimeout(animateTyping,500);
+    } else {
+      setTimeout(animateTyping,1200);
     }
-  });
-  
-  project.classList.toggle('active');
-  content.classList.toggle('show');
+  }
+  document.getElementById("navbar").classList.add("show-navbar");
 }
+animateTyping();
 
-function toggleMenu(){
-  const menu = document.getElementById("menuDropdown");
-  if(menu) menu.classList.toggle("show");
-}
-
-document.addEventListener("click", function(e){
-  const menu = document.getElementById("menuDropdown");
-  const menuBtn = document.querySelector(".nav-box a:first-child");
-  
-  if(menu && !menu.contains(e.target) && menuBtn && !menuBtn.contains(e.target)){
-    menu.classList.remove("show");
+const menuDropdown=document.getElementById("menuDropdown");
+const menuBtn=document.getElementById("menuBtn");
+const menuCloseBtn=document.getElementById("menuCloseBtn");
+function toggleMenu(){menuDropdown.classList.toggle("show");}
+if(menuBtn) menuBtn.onclick=(e)=>{e.stopPropagation();toggleMenu();};
+if(menuCloseBtn) menuCloseBtn.onclick=(e)=>{e.stopPropagation();menuDropdown.classList.remove("show");};
+document.addEventListener("click",function(e){
+  if(menuDropdown && !menuDropdown.contains(e.target) && menuBtn && !menuBtn.contains(e.target)){
+    menuDropdown.classList.remove("show");
   }
 });
 
-function showSection(id){
-  document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("show"));
-  const hero = document.querySelector(".hero");
-  const icons = document.getElementById("icons");
-  const menu = document.getElementById("menuDropdown");
-
-  if(hero) hero.style.display="none";
-  if(icons) icons.style.display="none";
-  if(menu) menu.classList.remove("show");
-
-  const backBtn = document.getElementById("backBtn");
-  if(backBtn) backBtn.classList.add("show");
-
-  const section = document.getElementById(id);
-  if(section) section.classList.add("show");
+function toggleMenuSection(section){
+  const item=document.getElementById(section+'Item');
+  const content=document.getElementById(section+'Content');
+  if(item) item.classList.toggle('active');
+  if(content) content.classList.toggle('show');
 }
-
-function goHome(){
-  document.querySelectorAll(".section").forEach(sec=>sec.classList.remove("show"));
-  const hero = document.querySelector(".hero");
-  const icons = document.getElementById("icons");
-  const backBtn = document.getElementById("backBtn");
-
-  if(hero) hero.style.display="flex";
-  if(icons) icons.style.display="none";
-  if(backBtn) backBtn.classList.remove("show");
-}
-
-function openLink(url){
-  window.open(url,"_blank");
-}
-
-const form = document.getElementById("contact-form");
-
-if(form) {
-  form.addEventListener("submit", async function(e){
-    e.preventDefault();
-    const data = new FormData(form);
-
-    try{
-      const res = await fetch("https://formspree.io/f/xyklvzld",{
-        method:"POST",
-        body:data,
-        headers:{'Accept':'application/json'}
-      });
-
-      if(res.ok){
-        form.reset();
-        
-        // 🔥🔥🔥 POPUP MESSAGE - ISKO APNE HISAB SE EDIT KAR SAKTA HAI 🔥🔥🔥
-        document.getElementById("popup").innerHTML = `
-          <div class="popup-box">
-            <h2>Message Sent!</h2>
-            <p style="color:#999; margin:10px 0;">Thanks for reaching out! I'll get back to you soon.</p>
-            <button onclick="goHomeFromPopup()">Back to Home</button>
-          </div>
-        `;
-        document.getElementById("popup").classList.add("show");
-      }
-    }catch{
-      alert("Error sending message");
+function toggleProject(id){
+  const p=document.getElementById(id);
+  const c=p.querySelector('.project-content');
+  document.querySelectorAll('.project-card').forEach(card=>{
+    if(card.id!==id){
+      card.classList.remove('active');
+      const cc=card.querySelector('.project-content');
+      if(cc) cc.classList.remove('show');
     }
   });
+  p.classList.toggle('active');
+  if(c) c.classList.toggle('show');
 }
-
+function showSection(id){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("show"));
+  const hero=document.querySelector(".hero");
+  if(hero) hero.style.display="none";
+  const backBtn=document.getElementById("backBtn");
+  if(backBtn) backBtn.classList.add("show");
+  const section=document.getElementById(id);
+  if(section) section.classList.add("show");
+  if(menuDropdown) menuDropdown.classList.remove("show");
+}
+function goHome(){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("show"));
+  const hero=document.querySelector(".hero");
+  if(hero) hero.style.display="flex";
+  const backBtn=document.getElementById("backBtn");
+  if(backBtn) backBtn.classList.remove("show");
+}
+function openLink(url){window.open(url,"_blank");}
+const contactForm=document.getElementById("contact-form");
+if(contactForm){
+  contactForm.addEventListener("submit",async function(e){
+    e.preventDefault();
+    const data=new FormData(contactForm);
+    try{
+      const res=await fetch("https://formspree.io/f/xyklvzld",{method:"POST",body:data,headers:{'Accept':'application/json'}});
+      if(res.ok){
+        contactForm.reset();
+        document.getElementById("popup").classList.add("show");
+      }
+    }catch(e){alert("Error sending message");}
+  });
+}
 function goHomeFromPopup(){
-  const popup = document.getElementById("popup");
-  if(popup) popup.classList.remove("show");
+  document.getElementById("popup").classList.remove("show");
   goHome();
 }
 </script>
-
 </body>
 </html>
