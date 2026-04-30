@@ -828,68 +828,107 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 }
 .section::-webkit-scrollbar{width:6px;}
 .section::-webkit-scrollbar-thumb{background:rgba(255,0,60,0.3);border-radius:10px;}
-    .skills-grid-inside {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 18px;
-      margin-top: 12px;
-    }
+    <style>
+/* Skills Box Container - No gap with hero */
+.skills-grid-inside {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  padding: 30px 25px;
+  background: linear-gradient(145deg, #0f0f1a, #1a1a2e);
+  border-radius: 28px;
+  border: 2px solid #dc143c;
+  box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  margin: 0; /* NO space above/below */
+}
 
-    .skill-chip-modern {
-      background: rgba(25, 25, 35, 0.8);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 80, 120, 0.4);
-      border-radius: 60px;
-      padding: 10px 24px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 16px;
-      font-weight: 500;
-      color: #f0f0f0;
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-      cursor: default;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      animation: floatGlow 3s ease-in-out infinite;
-      animation-delay: calc(var(--order, 0) * 0.1s);
-    }
+/* Heading Box - NO extra space */
+.unavailable-box {
+  margin: 0;
+  padding: 0;
+}
 
-    .skill-chip-modern i {
-      font-size: 22px;
-      transition: transform 0.2s ease;
-    }
+.unavailable-message {
+  display: inline-block;
+  background: linear-gradient(135deg, #dc143c, #8b0000);
+  padding: 8px 28px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.4);
+}
 
-    .skill-chip-modern .skill-name {
-      font-weight: 600;
-      background: linear-gradient(135deg, #fff 30%, #ffb0c0 80%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
+.unavailable-message span {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: white;
+  text-transform: uppercase;
+}
 
-    .skill-chip-modern:hover {
-      transform: translateY(-6px) scale(1.02);
-      border-color: rgba(255, 80, 120, 0.9);
-      background: rgba(40, 40, 55, 0.95);
-      box-shadow: 0 18px 28px -8px rgba(220, 20, 60, 0.5);
-    }
+/* Individual Skill Chips */
+.skill-chip-modern {
+  background: linear-gradient(135deg, rgba(30, 30, 45, 0.9), rgba(20, 20, 35, 0.95));
+  border: 1.5px solid rgba(220, 20, 60, 0.6);
+  border-radius: 20px;
+  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f0f0f0;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+  cursor: default;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
 
-    .skill-chip-modern:hover i {
-      transform: scale(1.1) rotate(2deg);
-    }
-    @keyframes floatGlow {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-4px); }
-      100% { transform: translateY(0px); }
-    }
+.skill-chip-modern i {
+  font-size: 22px;
+  transition: transform 0.2s ease;
+}
 
-    .skill-chip-modern:nth-child(1) { --order: 0; }
-    .skill-chip-modern:nth-child(2) { --order: 1; }
-    .skill-chip-modern:nth-child(3) { --order: 2; }
-    .skill-chip-modern:nth-child(4) { --order: 3; }
-    .skill-chip-modern:nth-child(5) { --order: 4; }
+.skill-chip-modern .skill-name {
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 30%, #ffb0c0 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.skill-chip-modern:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: #dc143c;
+  background: rgba(40, 40, 55, 0.98);
+  box-shadow: 0 18px 28px -8px rgba(220, 20, 60, 0.5);
+}
+
+.skill-chip-modern:hover i {
+  transform: scale(1.1);
+}
+
+/* Hero section - remove bottom margin if needed */
+.hero, .hero-section, [class*="hero"] {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
 </style>
+
+<!-- HTML - Skills Box -->
+<div class="unavailable-box">
+  <div class="unavailable-message">
+    <span>SKILLS</span>
+  </div>
+  <div class="skills-grid-inside">
+    <div class="skill-chip-modern"><i class="fa-brands fa-html5" style="color:#e96228;"></i><span class="skill-name">HTML5</span></div>
+    <div class="skill-chip-modern"><i class="fa-brands fa-css3-alt" style="color:#2965f1;"></i><span class="skill-name">CSS3</span></div>
+    <div class="skill-chip-modern"><i class="fa-brands fa-js" style="color:#f7df1e;"></i><span class="skill-name">JavaScript</span></div>
+    <div class="skill-chip-modern"><i class="fa-brands fa-figma" style="color:#f24e1e;"></i><span class="skill-name">Figma</span></div>
+    <div class="skill-chip-modern"><i class="fa-brands fa-canva" style="color:#00c4cc;"></i><span class="skill-name">Canva</span></div>
+  </div>
+</div>
 </head>
 <body>
 
