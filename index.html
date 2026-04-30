@@ -982,18 +982,102 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
     </div>
   </div>
 </div>
- <div class="unavailable-box">
-      <div class="unavailable-message">
-         <span>SKIILS</span> 
-      </div>
-      <div class="skills-grid-inside">
-        <div class="skill-chip-modern"><i class="fa-brands fa-html5" style="color:#e96228;"></i><span class="skill-name">HTML5</span></div>
-        <div class="skill-chip-modern"><i class="fa-brands fa-css3-alt" style="color:#2965f1;"></i><span class="skill-name">CSS3</span></div>
-        <div class="skill-chip-modern"><i class="fa-brands fa-js" style="color:#f7df1e;"></i><span class="skill-name">JavaScript</span></div>
-        <div class="skill-chip-modern"><i class="fa-brands fa-figma" style="color:#f24e1e;"></i><span class="skill-name">Figma</span></div>
-        <div class="skill-chip-modern"><i class="fa-brands fa-canva" style="color:#00c4cc;"></i><span class="skill-name">Canva</span></div>
-      </div>
-    </div>
+ <style>
+/* Skills Box Container */
+.skills-grid-inside {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  padding: 25px 20px;
+  background: linear-gradient(145deg, #0f0f1a, #1a1a2e);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 80, 120, 0.3);
+  box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  margin: 20px 0;
+}
+
+/* Individual Skill Boxes */
+.skill-chip-modern {
+  background: linear-gradient(135deg, rgba(30, 30, 45, 0.9), rgba(20, 20, 35, 0.95));
+  border: 1.5px solid rgba(255, 80, 120, 0.5);
+  border-radius: 20px;
+  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f0f0f0;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+  cursor: default;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+.skill-chip-modern i {
+  font-size: 22px;
+  transition: transform 0.2s ease;
+}
+
+.skill-chip-modern .skill-name {
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 30%, #ffb0c0 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Hover Effect - Box lifts up */
+.skill-chip-modern:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: #ff5078;
+  background: rgba(40, 40, 55, 0.98);
+  box-shadow: 0 18px 28px -8px rgba(255, 80, 120, 0.5);
+}
+
+.skill-chip-modern:hover i {
+  transform: scale(1.1);
+}
+
+/* SKILLS Heading Box */
+.unavailable-box {
+  margin-bottom: 10px;
+}
+
+.unavailable-message {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff5078, #ff2e5a);
+  padding: 8px 28px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(255, 80, 120, 0.3);
+}
+
+.unavailable-message span {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: white;
+  text-transform: uppercase;
+}
+</style>
+
+<!-- Your HTML (with typo fixed) -->
+<div class="unavailable-box">
+  <div class="unavailable-message">
+    <span>SKILLS</span>  <!-- Fixed typo: SKIILS → SKILLS -->
+  </div>
+  <div class="skills-grid-inside">
+    <div class="skill-chip-modern"><i class="fa-brands fa-html5" style="color:#e96228;"></i><span class="skill-name">HTML5</span></div>
+    <div class="skill-chip-modern"><i class="fa-brands fa-css3-alt" style="color:#2965f1;"></i><span class="skill-name">CSS3</span></div>
+    <div class="skill-chip-modern"><i class="fa-brands fa-js" style="color:#f7df1e;"></i><span class="skill-name">JavaScript</span></div>
+    <div class="skill-chip-modern"><i class="fa-brands fa-figma" style="color:#f24e1e;"></i><span class="skill-name">Figma</span></div>
+    <div class="skill-chip-modern"><i class="fa-brands fa-canva" style="color:#00c4cc;"></i><span class="skill-name">Canva</span></div>
+  </div>
+</div>
 
 <div id="about" class="section">
   <div class="section-header">
