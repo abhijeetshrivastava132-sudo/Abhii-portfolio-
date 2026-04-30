@@ -829,8 +829,9 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 .section::-webkit-scrollbar{width:6px;}
 .section::-webkit-scrollbar-thumb{background:rgba(255,0,60,0.3);border-radius:10px;}
     
+/* Skills Section - Slim Crimson Theme */
 .skills-section {
-  margin-top: 60px;
+  margin-top: 50px;
   width: 100%;
   max-width: 900px;
   padding: 0 20px;
@@ -841,76 +842,74 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 18px;
-  padding: 30px 25px;
-  background: linear-gradient(145deg, #0f0f1a, #1a1a2e);
-  border-radius: 28px;
-  border: 2px solid crimson;
-  box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.5);
+  gap: 12px;
+  padding: 20px 24px;
+  background: rgba(20, 20, 20, 0.95);
+  border-radius: 20px;
+  border: 1px solid rgba(220, 20, 60, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   margin: 0;
 }
 
 .unavailable-box {
+  width: 100%;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .unavailable-message {
   display: inline-block;
-  background: linear-gradient(135deg, crimson, #8b0000);
-  padding: 8px 28px;
-  border-radius: 50px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 12px rgba(220, 20, 60, 0.4);
+  background: transparent;
+  padding: 4px 16px;
+  border-radius: 30px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(220, 20, 60, 0.5);
 }
 
 .unavailable-message span {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: crimson;
   text-transform: uppercase;
 }
 
 .skill-chip-modern {
-  background: linear-gradient(135deg, rgba(30, 30, 45, 0.9), rgba(20, 20, 35, 0.95));
-  border: 1.5px solid rgba(220, 20, 60, 0.6);
-  border-radius: 20px;
-  padding: 12px 24px;
+  background: rgba(30, 30, 45, 0.6);
+  border: 1px solid rgba(220, 20, 60, 0.35);
+  border-radius: 30px;
+  padding: 6px 16px;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #f0f0f0;
-  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #eaeaea;
+  transition: all 0.2s ease;
   cursor: default;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(4px);
 }
 
 .skill-chip-modern i {
-  font-size: 22px;
+  font-size: 14px;
   transition: transform 0.2s ease;
 }
 
 .skill-chip-modern .skill-name {
-  font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 30%, #ffb0c0 80%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  font-weight: 500;
+  color: #eaeaea;
+  background: none;
+  -webkit-background-clip: unset;
+  color: #eaeaea;
 }
 
 .skill-chip-modern:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-2px);
   border-color: crimson;
-  background: rgba(40, 40, 55, 0.98);
-  box-shadow: 0 18px 28px -8px rgba(220, 20, 60, 0.5);
+  background: rgba(220, 20, 60, 0.1);
 }
 
 .skill-chip-modern:hover i {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .hero{
@@ -1053,12 +1052,12 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 </div>
 
  <div class="skills-section">
-  <div class="unavailable-box">
-    <div class="unavailable-message">
-      <span>SKILLS & TOOLS</span>
-    </div>
-  </div>
   <div class="skills-grid-inside">
+    <div class="unavailable-box">
+      <div class="unavailable-message">
+        <span>SKILLS & TOOLS</span>
+      </div>
+    </div>
     <div class="skill-chip-modern"><i class="fa-brands fa-html5" style="color:#e96228;"></i><span class="skill-name">HTML5</span></div>
     <div class="skill-chip-modern"><i class="fa-brands fa-css3-alt" style="color:#2965f1;"></i><span class="skill-name">CSS3</span></div>
     <div class="skill-chip-modern"><i class="fa-brands fa-js" style="color:#f7df1e;"></i><span class="skill-name">JavaScript</span></div>
