@@ -878,6 +878,17 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
     .skill-chip-modern:hover i {
       transform: scale(1.1) rotate(2deg);
     }
+    @keyframes floatGlow {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .skill-chip-modern:nth-child(1) { --order: 0; }
+    .skill-chip-modern:nth-child(2) { --order: 1; }
+    .skill-chip-modern:nth-child(3) { --order: 2; }
+    .skill-chip-modern:nth-child(4) { --order: 3; }
+    .skill-chip-modern:nth-child(5) { --order: 4; }
 </style>
 </head>
 <body>
