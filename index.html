@@ -1483,6 +1483,34 @@ function goHomeFromPopup(){ document.getElementById("popup").classList.remove("s
       <a href="mailto:contact@abhii.online">contact@abhii.online</a>
     </div>
   </div>
+// Skills section ke form ke liye
+const skillsContactForm = document.getElementById("skills-contact-form");
+if(skillsContactForm){
+  skillsContactForm.addEventListener("submit", async function(e){
+    e.preventDefault();
+    const data = new FormData(skillsContactForm);
+    try{
+      const res = await fetch("https://formspree.io/f/xyklvzld", {
+        method: "POST",
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if(res.ok){ 
+        skillsContactForm.reset(); 
+        document.getElementById("skillsPopup").classList.add("show"); 
+      } else {
+        alert("Error sending message. Please try again.");
+      }
+    } catch(e){
+      alert("Error sending message");
+    }
+  });
+}
+
+function closeSkillsPopup() {
+  document.getElementById("skillsPopup").classList.remove("show");
+}
+</script>
 </footer>
 </body>
 </html>
