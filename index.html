@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Abhii | Web Developer & UI Designer</title>
+<title>Abhii | Web Developer & UI  Designer</title>
 <meta name="description" content="Abhii's portfolio — web developer and UI designer building clean, modern websites.">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -1010,6 +1010,63 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 .hero-buttons{
   display:none;
 }
+/* Footer Section */
+.footer {
+  margin-top: 80px;
+  padding: 0 20px 40px;
+  text-align: center;
+}
+
+.footer-divider {
+  width: 60px;
+  height: 1px;
+  background: crimson;
+  margin: 0 auto 20px auto;
+  opacity: 0.5;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(30, 30, 45, 0.4);
+  padding: 8px 20px;
+  border-radius: 40px;
+  border: 1px solid rgba(220, 20, 60, 0.2);
+  transition: all 0.3s ease;
+}
+
+.footer-email i {
+  font-size: 14px;
+  color: crimson;
+}
+
+.footer-email a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.footer-email:hover {
+  border-color: rgba(220, 20, 60, 0.5);
+  background: rgba(220, 20, 60, 0.05);
+}
+
+.footer-email:hover a {
+  color: crimson;
+}
+
+.footer-email:hover i {
+  transform: scale(1.05);
+}
 </style>
 </head>
 <body>
@@ -1297,5 +1354,15 @@ if(contactForm){
 }
 function goHomeFromPopup(){ document.getElementById("popup").classList.remove("show"); goHome(); }
 </script>
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer-divider"></div>
+  <div class="footer-content">
+    <div class="footer-email">
+      <i class="fa-regular fa-envelope"></i>
+      <a href="mailto:contact@abhii.online">contact@abhii.online</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
