@@ -64,13 +64,13 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 }
 
 .navbar{
-  position:absolute;
-  top:-80px;
+  position:fixed;
+  top:-20px;
   width:100%;
   display:flex;
   justify-content:center;
   transition:0.8s;
-  z-index:50;
+  z-index:100;
 }
 .show-navbar{top:25px;}
 .nav-box{
@@ -95,8 +95,14 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
   align-items:center;
   gap:8px;
   outline:none;
+  padding: 6px 12px;        /* ✅ ADD: click area bada hoga */
+  border-radius: 30px;      /* ✅ ADD: rounded background on hover */
 }
-.nav-box a:hover{color:crimson;}
+
+.nav-box a:hover{
+  color: crimson;           /* ✅ ADD: hover effect */
+  background: rgba(255, 0, 60, 0.1);  /* ✅ ADD: light bg on hover */
+}
 
 .menu-dropdown{
   position:fixed;
@@ -261,7 +267,7 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
   align-items:center;
   text-align:center;
   position:relative;
-  padding:110px 20px 60px;
+  padding:120px 20px 60px;
 }
 .hero-content{z-index:2;}
 
