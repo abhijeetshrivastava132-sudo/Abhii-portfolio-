@@ -65,23 +65,23 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 
 .navbar{
   position:fixed;
-  top:-20px;
+  top: 20px;           /* -20px se badalkar 20px kiya */
   width:100%;
   display:flex;
   justify-content:center;
   transition:0.8s;
   z-index:100;
 }
-.show-navbar{top:25px;}
+.show-navbar{top:20px;}  /* 25px se 20px kiya */
 .nav-box{
   display:flex;
   gap:25px;
-  padding:12px 30px;
+  padding:10px 28px;     /* thoda compact kiya */
   border-radius:40px;
-  background:rgba(255,255,255,0.06);
+  background:rgba(0, 0, 0, 0.75);  /* background dark kiya */
   backdrop-filter:blur(16px);
-  box-shadow:0 0 30px rgba(255,0,60,0.08);
-  border:1px solid crimson;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);  /* shadow improved */
+  border:1px solid rgba(255,0,60,0.4);   /* border color tweak */
   justify-content:center;
   align-items:center;
 }
@@ -95,13 +95,13 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
   align-items:center;
   gap:8px;
   outline:none;
-  padding: 6px 12px;        /* ✅ ADD: click area bada hoga */
-  border-radius: 30px;      /* ✅ ADD: rounded background on hover */
+  padding: 6px 12px;
+  border-radius: 30px;
 }
 
 .nav-box a:hover{
-  color: crimson;           /* ✅ ADD: hover effect */
-  background: rgba(255, 0, 60, 0.1);  /* ✅ ADD: light bg on hover */
+  color: crimson;
+  background: rgba(255, 0, 60, 0.1);
 }
 
 .menu-dropdown{
@@ -268,6 +268,8 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
   text-align:center;
   position:relative;
   padding:120px 20px 60px;
+  margin-top: 0;           /* ✅ ADD - extra margin hatao */
+  scroll-margin-top: 60px; /* ✅ ADD - scroll ke liye safe area */
 }
 .hero-content{z-index:2;}
 
@@ -303,7 +305,6 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 .hero-buttons{
   display:none;
 }
-
 .featured-projects{
   margin-top:50px;
   padding:0 20px;
