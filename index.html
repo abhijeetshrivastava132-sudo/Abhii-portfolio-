@@ -1067,6 +1067,102 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 .footer-email:hover i {
   transform: scale(1.05);
 }
+/* Contact Form Section - Skills ke neeche */
+.contact-form-section {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.contact-form-inside {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px 30px;
+  background: rgba(20, 20, 20, 0.95);
+  border-radius: 20px;
+  border: 1px solid rgba(220, 20, 60, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  margin: 0;
+}
+
+.contact-form-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-form-message {
+  display: inline-block;
+  background: transparent;
+  padding: 4px 16px;
+  border-radius: 30px;
+  border: 1px solid rgba(220, 20, 60, 0.5);
+}
+
+.contact-form-message span {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: crimson;
+  text-transform: uppercase;
+}
+
+.skills-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.skills-contact-form input,
+.skills-contact-form textarea {
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(220, 20, 60, 0.3);
+  background: rgba(10, 10, 10, 0.8);
+  color: white;
+  outline: none;
+  transition: 0.3s;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.skills-contact-form input:focus,
+.skills-contact-form textarea:focus {
+  border-color: crimson;
+  box-shadow: 0 0 12px rgba(220, 20, 60, 0.2);
+}
+
+.skills-contact-form textarea {
+  resize: vertical;
+}
+
+.skills-contact-form button {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: crimson;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.skills-contact-form button:hover {
+  background: #ff1a4d;
+  transform: translateY(-2px);
+  gap: 14px;
+}
 </style>
 </head>
 <body>
@@ -1190,7 +1286,31 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
         <div class="skill-chip-modern"><i class="fa-brands fa-node" style="color:#68a063;"></i><span class="skill-name">Node.js</span></div>
       </div>
     </div>
-
+<!-- Contact Form Box - Skills ke neeche -->
+<div class="contact-form-section">
+  <div class="contact-form-inside">
+    <div class="contact-form-header">
+      <div class="contact-form-message">
+        <span>SEND A MESSAGE</span>
+      </div>
+    </div>
+    
+    <form id="skills-contact-form" class="skills-contact-form">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Tell me about your project..." rows="4" required></textarea>
+      <button type="submit">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+</div>
+<!-- Skills Section Popup -->
+<div id="skillsPopup" class="popup">
+  <div class="popup-box">
+    <h2>✨ Message Sent!</h2>
+    <p>Thanks for reaching out. I'll get back to you soon.</p>
+    <button onclick="closeSkillsPopup()">Close</button>
+  </div>
+</div>
   </div>
 </div>
 
