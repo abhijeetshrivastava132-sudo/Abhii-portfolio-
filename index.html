@@ -493,17 +493,15 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
 }
 
 .section{
-  display:none;
-  position:absolute;
-  top:12%;
-  left:0;
-  right:0;
-  width:100%;
-  text-align:center;
-  padding:20px 30px;
-  overflow-y:auto;
-  max-height:80vh;
-  z-index:10;
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 20px 60px;
+  background: #0a0a0a;
+}
+
+.section.show {
+  display: block;
 }
 .section.show{display:block;}
 .section h2{font-size:32px;margin-bottom:0;}
@@ -1553,32 +1551,40 @@ function toggleProject(id){
   if(c) c.classList.toggle('show');
 }
 function showSection(id){
-  document.querySelectorAll(".section").forEach(s=>s.classList.remove("show"));
-  const hero=document.querySelector(".hero");
-  if(hero) hero.style.display="none";
-  const backBtn=document.getElementById("backBtn");
-  if(backBtn) backBtn.classList.add("show");
-  const section=document.getElementById(id);
+  // Sab sections chhupao
+  document.querySelectorAll(".section").forEach(s => {
+    s.classList.remove("show");
+  });
+  
+  // Hero chhupao
+  const hero = document.querySelector(".hero");
+  if(hero) hero.style.display = "none";
+  
+  // Jo section click kiya hai woh dikhao
+  const section = document.getElementById(id);
   if(section) section.classList.add("show");
+  
+  // Back button dikhao
+  const backBtn = document.getElementById("backBtn");
+  if(backBtn) backBtn.classList.add("show");
+  
+  // Menu band karo
+  const menuDropdown = document.getElementById("menuDropdown");
   if(menuDropdown) menuDropdown.classList.remove("show");
 }
 function goHome(){
-  document.querySelectorAll(".section").forEach(s=>s.classList.remove("show"));
-  const hero=document.querySelector(".hero");
-  if(hero) hero.style.display="flex";
-  const backBtn=document.getElementById("backBtn");
-  if(backBtn) backBtn.classList.remove("show");
-}
-const contactForm=document.getElementById("contact-form");
-if(contactForm){
-  contactForm.addEventListener("submit",async function(e){
-    e.preventDefault();
-    const data=new FormData(contactForm);
-    try{
-      const res=await fetch("https://formspree.io/f/xyklvzld",{method:"POST",body:data,headers:{'Accept':'application/json'}});
-      if(res.ok){ contactForm.reset(); document.getElementById("popup").classList.add("show"); }
-    }catch(e){alert("Error sending message");}
+  // Sab sections chhupao
+  document.querySelectorAll(".section").forEach(s => {
+    s.classList.remove("show");
   });
+  
+  // Hero dikhao
+  const hero = document.querySelector(".hero");
+  if(hero) hero.style.display = "flex";
+  
+  // Back button chhupao
+  const backBtn = document.getElementById("backBtn");
+  if(backBtn) backBtn.classList.remove("show");
 }
 function goHomeFromPopup(){ document.getElementById("popup").classList.remove("show"); goHome(); }
 </script>
