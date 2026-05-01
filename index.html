@@ -1163,6 +1163,66 @@ a, button, div, .menu-item, .project-card, .social-card, .info-card, .premium-ca
   transform: translateY(-2px);
   gap: 14px;
 }
+/* ===== FIX: Left-Right Scroll Hatao (Yahan se daalna shuru) ===== */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden !important;
+  width: 100%;
+  position: relative;
+}
+
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.hero, 
+.hero-content, 
+.featured-projects, 
+.featured-grid,
+.skills-section,
+.about-section,
+.contact-form-section,
+.footer {
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skills-grid-inside {
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.nav-box {
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 95%;
+}
+
+img, iframe, video, .featured-preview img {
+  max-width: 100%;
+  height: auto;
+}
+/* ===== Fix yahan tak ===== */
 </style>
 </head>
 <body>
