@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abhii – Web developer & Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800;900&family=Barlow+Condensed:wght@400;700;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <!-- Preload Hero Photo -->
+<link rel="preload" as="image" href="https://i.ibb.co/CK8Hsmkt/file-00000000fb847208abc367e05249aa86.png">
+
+<!-- Preload Kerala Beauty Screenshot -->
+<link rel="preload" as="image" href="https://api.microlink.io/?url=https://kerala-beauty.vercel.app&screenshot=true&embed=screenshot.url">
+
+<!-- DNS Prefetch for faster API connection -->
+<link rel="dns-prefetch" href="https://api.microlink.io">
+<link rel="dns-prefetch" href="https://i.ibb.co">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #e03030;
+      --red-dark: #b82424;
+      --bg: #111111;
+      --bg2: #1a1a1a;
+      --bg3: #222222;
+      --card: #1e1e1e;
+      --text: #ffffff;
+      --muted: #888888;
+      --border: #2a2a2a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(17,17,17,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo svg { width: 36px; height: 36px; fill: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px; left: 0; right: 0;
+      background: var(--bg2);
+      z-index: 99;
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--muted);
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--text); }
+    .mobile-menu.open { display: flex; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding: 120px 48px 80px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(224,48,48,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+   .hero-image {
+  flex-shrink: 0;
+  width: 340px;
+  position: relative;
+  animation: fadeInLeft 0.9s ease both;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #1a0e0e;
+  line-height: 0;
+}
+
+   .hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+    .hero-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #2a1a1a 0%, #1a0e0e 100%);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      border: 1px solid var(--border);
+    }
+
+    /* Red accent line on hero image */
+   .hero-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  height: 3px;
+  background: var(--red);
+}
+
+    .hero-text {
+      animation: fadeInRight 0.9s ease 0.2s both;
+    }
+
+    .hero-label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--red);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(48px, 7vw, 80px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .hero-desc {
+      color: var(--muted);
+      max-width: 400px;
+      font-size: 14px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--text);
+    }
+
+    .btn-outline:hover { background: var(--red); }
+
+    /* ── SERVICES ── */
+    .services {
+      background: var(--bg2);
+      padding: 80px 48px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--card);
+      padding: 40px 36px;
+      position: relative;
+      transition: background 0.25s;
+      cursor: pointer;
+    }
+
+    .service-card:hover { background: #272727; }
+
+    .service-card.active {
+      background: var(--red);
+    }
+
+    .service-card.active .service-title { color: #fff; }
+    .service-card.active .service-desc { color: rgba(255,255,255,0.75); }
+    .service-card.active .service-link { color: #fff; }
+    .service-card.active .service-icon { color: #fff; }
+
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .service-card.active .service-icon { color: #fff; }
+
+    .service-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .service-link {
+      color: var(--red);
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+
+    .service-link:hover { gap: 10px; }
+
+    /* ── STATS ── */
+    .stats {
+      padding: 80px 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .stats-inner {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .stats-big {
+      flex-shrink: 0;
+      padding-right: 60px;
+    }
+
+    .stats-big-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(80px, 12vw, 140px);
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .stats-big-label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .stat-card {
+      background: var(--card);
+      padding: 32px 28px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      padding: 80px 48px;
+      background: var(--bg2);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+      gap: 20px;
+    }
+
+    .section-header-left {}
+
+    .section-title {
+      font-family: 'Barlow', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: var(--card);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: var(--bg3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-thumb-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .project-thumb-inner { transform: scale(1.04); }
+
+    /* Colorful placeholder thumbs */
+    .thumb-vintage { background: linear-gradient(135deg, #1a1a1a 0%, #2d1a0e 60%, #1a1208 100%); }
+    .thumb-food { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+    .thumb-marco { background: linear-gradient(135deg, #c9d6df 0%, #e2ebf0 100%); }
+    .thumb-mozaik { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
+
+    .thumb-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .thumb-marco .thumb-text { color: rgba(0,0,0,0.3); }
+
+    .project-info {
+      padding: 24px 28px;
+    }
+
+    .project-name {
+      font-family: 'Barlow', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .project-link {
+      color: var(--red);
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+
+    .project-link:hover { gap: 10px; }
+
+    /* ── CTA ── */
+    .cta {
+      padding: 80px 48px;
+    }
+
+    .cta-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 64px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      border-radius: 2px;
+    }
+
+    .cta-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      max-width: 480px;
+    }
+
+    .cta-desc {
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 400px;
+      margin-top: 14px;
+    }
+
+    .cta-right { flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .footer-logo svg { width: 32px; height: 32px; fill: var(--red); }
+
+    .footer-socials {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-socials a {
+      color: var(--muted);
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-socials a:hover { color: var(--red); }
+
+    .footer-credit {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer-credit span { color: var(--red); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-image { width: 100%; max-width: 360px; }
+
+      .hero { padding: 100px 24px 60px; }
+      .hero-inner { flex-direction: column; align-items: flex-start; gap: 36px; }
+      .hero-image { max-width: 300px; }
+
+      .services { padding: 60px 24px; }
+      .services-grid { grid-template-columns: 1fr; gap: 2px; }
+
+      .stats { padding: 60px 24px; }
+      .stats-inner { flex-direction: column; align-items: flex-start; gap: 32px; }
+      .stats-big { padding-right: 0; }
+      .stats-grid { width: 100%; }
+
+      .projects { padding: 60px 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; gap: 16px; }
+
+      .cta { padding: 60px 24px; }
+      .cta-inner { flex-direction: column; padding: 40px 28px; gap: 28px; }
+
+      footer { padding: 28px 24px; }
+      .footer-top { flex-wrap: wrap; gap: 16px; }
+      .footer-bottom { flex-wrap: wrap; gap: 16px; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 44px; }
+      .stats-big-number { font-size: 80px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 40px 36px;
+  max-width: 550px;
+  width: 90%;
+  position: relative;
+  animation: fadeInUp 0.4s ease;
+  max-height: 85vh;       /* ✅ ADD THIS */
+  overflow-y: auto;        /* ✅ ADD THIS */
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover { color: var(--red); }
+
+.modal-label {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.modal-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.modal-text {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.modal-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--bg2);
+  border-radius: 2px;
+}
+
+.modal-detail {
+  display: flex;
+  gap: 6px;
+  font-size: 13px;
+  flex-wrap: wrap;         /* ✅ ADD THIS */
+}
+
+.modal-detail-label {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;     /* ✅ ADD THIS */
+}
+
+.modal-detail-value {
+  color: var(--muted);
+  word-break: break-word;  /* ✅ ADD THIS */
+}
+/* Skills & Tools boxes */
+.modal-info-box {
+  background: var(--bg2);
+  border-radius: 4px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+}
+
+.modal-box-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  background: var(--bg3);
+  color: var(--muted);
+  font-size: 11px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 6px 14px;
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.skill-tag:hover {
+  color: var(--red);
+  border-color: var(--red);
+  background: rgba(224,48,48,0.08);
+}
+.project-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.project-thumb-link {
+  display: block;
+  text-decoration: none;
+}
+
+.project-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-thumb-img { transform: scale(1.04); }
+
+.project-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.contact-input,
+.contact-textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  border-radius: 2px;
+  transition: border-color 0.2s;
+  outline: none;
+  width: 100%;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+  border-color: var(--red);
+}
+
+.contact-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+  color: #555;
+}
+
+.form-status {
+  font-size: 12px;
+  margin-top: 8px;
+  display: none;
+}
+
+.form-status.success {
+  color: #4ade80;
+  display: block;
+}
+
+.form-status.error {
+  color: var(--red);
+  display: block;
+}
+.project-thumb-link {
+  display: block;
+  text-decoration: none;
+}
+
+.project-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-thumb-img {
+  transform: scale(1.04);
+}
+
+.project-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo" style="text-decoration:none;">
+    <span style="font-family:'Barlow Condensed',sans-serif; font-size:22px; font-weight:900; color:var(--text); letter-spacing:0.04em;">Abhii<span style="color:var(--red);">Designs</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#projects">Project</a></li>
+    <li><a href="javascript:void(0)" onclick="openModal('aboutModal')">About</a></li>
+    <li><a href="javascript:void(0)" onclick="openModal('contactModal')">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="closeMenu()">Home</a>
+  <a href="#projects" onclick="closeMenu()">Project</a>
+  <a href="javascript:void(0)" onclick="openModal('aboutModal'); closeMenu();">About</a>
+  <a href="javascript:void(0)" onclick="openModal('contactModal'); closeMenu();">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-image">
+      <img src="https://i.ibb.co/CK8Hsmkt/file-00000000fb847208abc367e05249aa86.png" alt="Abhii" style="display:block; width:100%; height:auto;">
+    </div>
+    <div class="hero-text">
+      <p class="hero-label">Hello I'm Abhii</p>
+      <h1 class="hero-title">Website<br>Designer & Developer</h1>
+      <p class="hero-desc">I design and develop websites that help businesses grow, attract more customers, and build a strong online presence. My focus is on creating clean, user-friendly designs that turn visitors into real results.</p>
+      <a href="javascript:void(0)" class="btn" onclick="openModal('aboutModal')">About Me →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="about">
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="4" y="6" width="28" height="24" rx="2"/>
+        <rect x="8" y="10" width="20" height="12" rx="1"/>
+        <line x1="12" y1="26" x2="24" y2="26"/>
+      </svg>
+      <h3 class="service-title">UI Design</h3>
+      <p class="service-desc">Visually striking interfaces built for impact.</p>
+      <a href="javascript:void(0)" class="service-link" onclick="openModal('uiModal')">Know More →</a>
+    </div>
+    <div class="service-card active reveal">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="4" width="24" height="28" rx="2"/>
+        <line x1="11" y1="12" x2="25" y2="12"/>
+        <line x1="11" y1="17" x2="25" y2="17"/>
+        <line x1="11" y1="22" x2="20" y2="22"/>
+        <path d="M22 26 L25 29 L30 24" stroke-width="2"/>
+      </svg>
+      <h3 class="service-title">Product Design</h3>
+      <p class="service-desc">Purpose-driven designs that deliver value.</p>
+      <a href="javascript:void(0)" class="service-link" onclick="openModal('productModal')">Know More →</a>
+    </div>
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="18,4 32,12 32,24 18,32 4,24 4,12"/>
+        <polygon points="18,10 26,15 26,21 18,26 10,21 10,15"/>
+      </svg>
+      <h3 class="service-title">Branding</h3>
+      <p class="service-desc">Building strong brand identities that stand out and connect.</p>
+      <a href="javascript:void(0)" class="service-link" onclick="openModal('brandingModal')">Know More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stats-big reveal">
+      <div class="stats-big-number">Stats</div>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-number">7</div>
+        <div class="stat-label">Clients</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">02</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">9+</div>
+        <div class="stat-label">Completed Projects</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Achievements</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="section-header">
+    <div class="section-header-left">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-sub">Some of my recent works</p>
+    </div>
+  </div>
+
+  <div class="projects-grid">
+    
+    <!-- Project: Kerala Beauty -->
+    <div class="project-card reveal">
+      <a href="https://kerala-beauty.vercel.app" target="_blank" class="project-thumb-link">
+        <div class="project-thumb">
+          <img src="https://api.microlink.io/?url=https://kerala-beauty.vercel.app&screenshot=true&embed=screenshot.url" 
+               alt="Kerala Beauty Website" 
+               class="project-thumb-img"
+               onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22320%22 height=%22200%22><rect fill=%22%23667eea%22 width=%22320%22 height=%22200%22/><text fill=%22white%22 font-size=%2220%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22>KERALA BEAUTY</text></svg>';">
+        </div>
+      </a>
+      <div class="project-info">
+        <h3 class="project-name">Kerala Trip</h3>
+        <p style="color:var(--muted); font-size:13px; margin-bottom:16px;">A beautiful website showcasing Kerala's beauty & culture.</p>
+        <div class="project-buttons">
+          <a href="https://kerala-beauty.vercel.app" target="_blank" class="btn">Live</a>
+          <a href="javascript:void(0)" class="project-link" onclick="openModal('keralaModal')">Know More →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="cta-inner reveal">
+    <div>
+      <h2 class="cta-title">Let's work together on your next project</h2>
+      <p class="cta-desc">Let’s create something that not only looks great but helps your business grow.</p>
+    </div>
+    <div class="cta-right">
+      <a href="javascript:void(0)" class="btn" onclick="openModal('contactModal')">Contact</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT MODAL -->
+<div class="modal-overlay" id="aboutModal">
+  <div class="modal-box">
+  <button class="modal-close" onclick="closeModal('aboutModal')">✕</button>
+    <p class="modal-label">About Me</p>
+    <h2 class="modal-heading">Crafting Digital Experiences</h2>
+    <p class="modal-text">
+      I'm Abhii, a passionate web developer & designer with 2+ years of experience. I build clean, responsive websites that help businesses grow and connect with their audience.
+    </p>
+    <p class="modal-text">
+      My approach blends aesthetic design with functional development. Every project is crafted with attention to detail.
+    </p>
+
+    <!-- SKILLS BOX -->
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Web Design</span>
+        <span class="skill-tag">UI/UX Design</span>
+        <span class="skill-tag">Frontend Development</span>
+        <span class="skill-tag">Responsive Design</span>
+        <span class="skill-tag">Wireframing</span>
+        <span class="skill-tag">Prototyping</span>
+        <span class="skill-tag">Branding</span>
+        <span class="skill-tag">Graphic Design</span>
+      </div>
+    </div>
+
+    <!-- TOOLS & TECH BOX -->
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> Tech</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">Git & GitHub</span>
+        <span class="skill-tag">Photoshop</span>
+        <span class="skill-tag">Canva</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UI DESIGN MODAL -->
+<div class="modal-overlay" id="uiModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('uiModal')">✕</button>
+    <p class="modal-label">Service</p>
+    <h2 class="modal-heading">UI Design</h2>
+    <p class="modal-text">
+      I create visually striking interfaces that capture attention and leave a lasting impression. My UI designs focus on clean layouts, perfect color harmony, and smooth interactions.
+    </p>
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> What I Offer</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Website UI</span>
+        <span class="skill-tag">Mobile App UI</span>
+        <span class="skill-tag">Landing Pages</span>
+        <span class="skill-tag">Dashboard Design</span>
+        <span class="skill-tag">Wireframes</span>
+        <span class="skill-tag">Prototypes</span>
+      </div>
+    </div>
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> Tools Used</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Adobe XD</span>
+        <span class="skill-tag">Photoshop</span>
+      </div>
+    </div>
+    <a href="mailto:contact@abhii.online" class="btn">Get This Service</a>
+  </div>
+</div>
+
+<!-- PRODUCT DESIGN MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('productModal')">✕</button>
+    <p class="modal-label">Service</p>
+    <h2 class="modal-heading">Product Design</h2>
+    <p class="modal-text">
+      Purpose-driven designs that solve real problems and deliver value. I build products with user-first thinking, ensuring every feature serves a purpose.
+    </p>
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> What I Offer</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">User Research</span>
+        <span class="skill-tag">UX Strategy</span>
+        <span class="skill-tag">Interaction Design</span>
+        <span class="skill-tag">Usability Testing</span>
+        <span class="skill-tag">MVP Design</span>
+        <span class="skill-tag">Product Strategy</span>
+      </div>
+    </div>
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> Tools Used</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Miro</span>
+        <span class="skill-tag">Notion</span>
+      </div>
+    </div>
+    <a href="mailto:contact@abhii.online" class="btn">Get This Service</a>
+  </div>
+</div>
+
+<!-- BRANDING MODAL -->
+<div class="modal-overlay" id="brandingModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('brandingModal')">✕</button>
+    <p class="modal-label">Service</p>
+    <h2 class="modal-heading">Branding</h2>
+    <p class="modal-text">
+      Building strong brand identities that stand out from the crowd. I craft memorable brands that connect emotionally with audiences and drive loyalty.
+    </p>
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> What I Offer</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Logo Design</span>
+        <span class="skill-tag">Brand Guidelines</span>
+        <span class="skill-tag">Color Palette</span>
+        <span class="skill-tag">Typography</span>
+        <span class="skill-tag">Social Media Kit</span>
+        <span class="skill-tag">Brand Strategy</span>
+      </div>
+    </div>
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> Tools Used</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Illustrator</span>
+        <span class="skill-tag">Photoshop</span>
+        <span class="skill-tag">Canva</span>
+        <span class="skill-tag">Figma</span>
+      </div>
+    </div>
+    <a href="mailto:contact@abhii.online" class="btn">Get This Service</a>
+  </div>
+  </div>
+  <!-- KERALA BEAUTY MODAL -->
+<div class="modal-overlay" id="keralaModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('keralaModal')">✕</button>
+    <p class="modal-label">Project</p>
+    <h2 class="modal-heading">Kerala Beauty</h2>
+    <p class="modal-text">
+      A stunning website that captures the essence of Kerala's natural beauty, culture, and tourist destinations. Designed with a clean, modern aesthetic.
+    </p>
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> Features</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Responsive Design</span>
+        <span class="skill-tag">Modern UI</span>
+        <span class="skill-tag">Image Gallery</span>
+        <span class="skill-tag">Smooth Animations</span>
+      </div>
+    </div>
+    <div class="modal-info-box">
+      <h3 class="modal-box-title"> Tech Used</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
+    </div>
+    <a href="https://kerala-beauty.vercel.app" target="_blank" class="btn">View</a>
+  </div>
+</div>
+</div>
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
+    <p class="modal-label">Contact</p>
+    <h2 class="modal-heading">Get In Touch</h2>
+    <p class="modal-text">
+      Have a project in mind? Fill the form below and I'll get back to you soon.
+    </p>
+
+    <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+            <input type="text" name="name" class="contact-input" placeholder="Your Name" required>
+      <input type="email" name="email" class="contact-input" placeholder="Your Email" required>
+      <input type="text" name="subject" class="contact-input" placeholder="Subject">
+      <textarea name="message" class="contact-textarea" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn" id="submitBtn">Send Message</button>
+      <p class="form-status" id="formStatus"></p>
+    </form>
+  </div>
+</div>
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80 * (entry.target.dataset.delay || 0));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.dataset.delay = i % 4;
+    observer.observe(el);
+  });
+
+  // Smooth close mobile menu on outside click
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('mobileMenu');
+    if (!menu.contains(e.target) && !e.target.closest('.hamburger')) {
+      menu.classList.remove('open');
+    }
+  });
+
+  // Modal functions
+  function openModal(modalId) {
+    document.getElementById(modalId).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // Close on ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+        modal.classList.remove('active');
+      });
+      document.body.style.overflow = '';
+    }
+  });
+  // Contact form submit
+function submitForm(event) {
+  event.preventDefault();
+
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('formStatus');
+
+  // Show loading
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '0.7';
+  status.className = 'form-status';
+  status.textContent = '';
+
+  const formData = new FormData(form);
+
+  fetch('https://formspree.io/f/xyklvzld', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      status.className = 'form-status success';
+      status.textContent = 'message sent successfully! I\'ll get back to you soon.';
+      form.reset();
+    } else {
+      throw new Error('Failed');
+    }
+  })
+  .finally(() => {
+    btn.textContent = 'Send Message';
+    btn.style.opacity = '1';
+  });
+}
+</script>
+</body>
+</html>
