@@ -40,6 +40,7 @@ const projects = [
 const services = ['Website Design', 'Full Stack Development', 'App UI Design', 'Branding & SEO'];
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+const photoStops = projects.map((_, index) => (index + 0.5) / projects.length);
 
 export default function App() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -58,10 +59,14 @@ export default function App() {
         const rect = section.getBoundingClientRect();
         const totalScroll = section.offsetHeight - window.innerHeight;
         const rawProgress = totalScroll > 0 ? clamp(-rect.top / totalScroll, 0, 1) : 0;
-        const index = Math.min(projects.length - 1, Math.floor(rawProgress * projects.length));
+        const nearestIndex = photoStops.reduce((closest, stop, index) => {
+          const currentDistance = Math.abs(rawProgress - stop);
+          const closestDistance = Math.abs(rawProgress - photoStops[closest]);
+          return currentDistance < closestDistance ? index : closest;
+        }, 0);
 
         setProgress(rawProgress);
-        setActiveIndex(index);
+        setActiveIndex(nearestIndex);
       });
     };
 
@@ -91,9 +96,9 @@ export default function App() {
         <section className="hero-section" id="home">
           <p className="eyebrow">Web Designer & Full Stack Developer in India</p>
           <h1>Scroll through my work like a cinematic project corridor.</h1>
-          <p>I build mobile-first websites, full stack web apps, branding, and SEO-focused digital experiences for businesses, coaching institutes, startups, and modern brands.</p>
+          <p>One page. One character. A room with project photos on both walls. Scroll forward, the nearest photo zooms in, then zooms out as the character moves ahead.</p>
           <div className="hero-actions">
-            <a href="#work" className="primary-btn">Enter Portfolio</a>
+            <a href="#work" className="primary-btn">Enter Room</a>
             <a href="#contact" className="ghost-btn">Start Project</a>
           </div>
         </section>
@@ -105,7 +110,7 @@ export default function App() {
             <div className="light-beam light-right" />
             <div className="depth-lines" aria-hidden="true" />
 
-            <div className="room" style={{ transform: `translateZ(${progress * 120}px) rotateX(${progress * 1.4}deg)` }}>
+            <div className="room" style={{ transform: `translateZ(${progress * 90}px) rotateX(${progress * 1.1}deg)` }}>
               <div className="ceiling" />
               <div className="wall left-wall" />
               <div className="wall right-wall" />
@@ -118,7 +123,7 @@ export default function App() {
                 ))}
               </div>
 
-              <div className="character" style={{ transform: `translateX(-50%) translateY(${-progress * 74 + Math.sin(progress * 86) * 5}px) scale(${1 - progress * 0.16})` }} aria-hidden="true">
+              <div className="character" style={{ transform: `translateX(-50%) translateY(${-progress * 96 + Math.sin(progress * 110) * 5}px) scale(${1 - progress * 0.12})` }} aria-hidden="true">
                 <span className="character-shadow" />
                 <span className="character-head" />
                 <span className="character-body" />
@@ -128,24 +133,29 @@ export default function App() {
               </div>
 
               {projects.map((project, index) => {
-                const projectProgress = progress * projects.length - index;
-                const distance = Math.abs(index - activeIndex);
+                const stop = photoStops[index];
+                const distance = Math.abs(progress - stop);
+                const proximity = clamp(1 - distance * projects.length * 2.35, 0, 1);
+                const smoothZoom = proximity * proximity * (3 - 2 * proximity);
                 const side = index % 2 === 0 ? 'left' : 'right';
-                const isActive = index === activeIndex;
-                const local = clamp(projectProgress, -1, 1);
-                const depth = isActive ? 0 : 160 + distance * 90;
-                const scale = isActive ? 1 : clamp(0.46 + (1 - distance) * 0.12, 0.38, 0.62);
-                const rotate = side === 'left' ? 9 : -9;
+                const isFocused = smoothZoom > 0.5;
+                const wallX = side === 'left' ? 27 : 73;
+                const activeX = 50;
+                const left = wallX + (activeX - wallX) * smoothZoom;
+                const scale = 0.5 + smoothZoom * 0.55;
+                const depth = -240 + smoothZoom * 240;
+                const rotate = side === 'left' ? 14 - smoothZoom * 14 : -14 + smoothZoom * 14;
 
                 return (
                   <article
-                    className={`project-frame ${side} ${isActive ? 'active' : ''}`}
+                    className={`project-frame ${side} ${isFocused ? 'active' : ''}`}
                     key={project.id}
                     style={{
-                      '--local': local,
-                      opacity: isActive ? 1 : Math.max(0.1, 0.58 - distance * 0.18),
-                      filter: isActive ? 'blur(0)' : `blur(${Math.min(distance * 2.3, 5)}px)`,
-                      transform: `translate(-50%, -50%) translateZ(${-depth}px) scale(${scale}) rotateY(${isActive ? 0 : rotate}deg)`,
+                      '--local': smoothZoom,
+                      left: `${left}%`,
+                      opacity: 0.18 + smoothZoom * 0.82,
+                      filter: `blur(${(1 - smoothZoom) * 4}px)`,
+                      transform: `translate(-50%, -50%) translateZ(${depth}px) scale(${scale}) rotateY(${rotate}deg)`,
                     }}
                   >
                     <div className="frame-ring" />
@@ -162,7 +172,7 @@ export default function App() {
             </div>
 
             <div className="scene-status">
-              <span>Viewing</span>
+              <span>Nearest photo</span>
               <strong>{activeProject.title}</strong>
             </div>
 
