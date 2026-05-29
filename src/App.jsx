@@ -38,6 +38,8 @@ const projects = [
 
 const services = ['Website Design', 'Full Stack Development', 'App UI Design', 'Branding & SEO'];
 
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
 export default function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -47,13 +49,19 @@ export default function App() {
     const section = document.querySelector('.corridor-section');
     if (!section) return undefined;
 
+    let frameId = 0;
+
     const updateScene = () => {
-      const rect = section.getBoundingClientRect();
-      const totalScroll = section.offsetHeight - window.innerHeight;
-      const rawProgress = totalScroll > 0 ? Math.min(Math.max(-rect.top / totalScroll, 0), 1) : 0;
-      const index = Math.min(projects.length - 1, Math.floor(rawProgress * projects.length));
-      setProgress(rawProgress);
-      setActiveIndex(index);
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const totalScroll = section.offsetHeight - window.innerHeight;
+        const rawProgress = totalScroll > 0 ? clamp(-rect.top / totalScroll, 0, 1) : 0;
+        const index = Math.min(projects.length - 1, Math.floor(rawProgress * projects.length));
+
+        setProgress(rawProgress);
+        setActiveIndex(index);
+      });
     };
 
     updateScene();
@@ -61,6 +69,7 @@ export default function App() {
     window.addEventListener('resize', updateScene);
 
     return () => {
+      cancelAnimationFrame(frameId);
       window.removeEventListener('scroll', updateScene);
       window.removeEventListener('resize', updateScene);
     };
@@ -89,24 +98,56 @@ export default function App() {
         </section>
 
         <section className="corridor-section" id="work" aria-label="Scroll project corridor">
-          <div className="sticky-scene">
-            <div className="room">
+          <div className="sticky-scene" style={{ '--scene-progress': progress }}>
+            <div className="scene-vignette" />
+            <div className="light-beam light-left" />
+            <div className="light-beam light-right" />
+            <div className="depth-lines" aria-hidden="true" />
+
+            <div className="room" style={{ transform: `translateZ(${progress * 120}px) rotateX(${progress * 1.4}deg)` }}>
+              <div className="ceiling" />
               <div className="wall left-wall" />
               <div className="wall right-wall" />
               <div className="floor" />
+              <div className="center-road" />
 
-              <div className="character" style={{ transform: `translateX(-50%) translateY(${-progress * 70 + Math.sin(progress * 70) * 5}px) scale(${1 - progress * 0.18})` }} aria-hidden="true">
+              <div className="gallery-markers" aria-hidden="true">
+                {projects.map((project, index) => (
+                  <span key={project.id} className={index === activeIndex ? 'marker active' : 'marker'} />
+                ))}
+              </div>
+
+              <div className="character" style={{ transform: `translateX(-50%) translateY(${-progress * 74 + Math.sin(progress * 86) * 5}px) scale(${1 - progress * 0.16})` }} aria-hidden="true">
+                <span className="character-shadow" />
                 <span className="character-head" />
                 <span className="character-body" />
+                <span className="character-arm arm-left" />
+                <span className="character-arm arm-right" />
                 <span className="character-legs" />
               </div>
 
               {projects.map((project, index) => {
+                const projectProgress = progress * projects.length - index;
                 const distance = Math.abs(index - activeIndex);
                 const side = index % 2 === 0 ? 'left' : 'right';
+                const isActive = index === activeIndex;
+                const local = clamp(projectProgress, -1, 1);
+                const depth = isActive ? 0 : 160 + distance * 90;
+                const scale = isActive ? 1 : clamp(0.46 + (1 - distance) * 0.12, 0.38, 0.62);
+                const rotate = side === 'left' ? 9 : -9;
 
                 return (
-                  <article className={`project-frame ${side} ${index === activeIndex ? 'active' : ''}`} key={project.id} style={{ opacity: index === activeIndex ? 1 : Math.max(0.14, 0.65 - distance * 0.2), filter: index === activeIndex ? 'blur(0)' : `blur(${Math.min(distance * 2, 5)}px)` }}>
+                  <article
+                    className={`project-frame ${side} ${isActive ? 'active' : ''}`}
+                    key={project.id}
+                    style={{
+                      '--local': local,
+                      opacity: isActive ? 1 : Math.max(0.1, 0.58 - distance * 0.18),
+                      filter: isActive ? 'blur(0)' : `blur(${Math.min(distance * 2.3, 5)}px)`,
+                      transform: `translate(-50%, -50%) translateZ(${-depth}px) scale(${scale}) rotateY(${isActive ? 0 : rotate}deg)`,
+                    }}
+                  >
+                    <div className="frame-ring" />
                     <img src={project.image} alt={`${project.title} preview`} />
                     <div className="project-content">
                       <span>{project.id} / {project.type}</span>
@@ -122,6 +163,10 @@ export default function App() {
             <div className="scene-status">
               <span>Viewing</span>
               <strong>{activeProject.title}</strong>
+            </div>
+
+            <div className="scroll-meter" aria-hidden="true">
+              <span style={{ transform: `scaleX(${progress})` }} />
             </div>
           </div>
         </section>
