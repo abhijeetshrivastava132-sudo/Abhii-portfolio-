@@ -1,40 +1,38 @@
 import { useEffect, useState } from 'react';
 
 export function Loader() {
-  const [hidden, setHidden] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setHidden(true), 2600);
+    const timer = window.setTimeout(() => setIsDone(true), 2600);
     return () => window.clearTimeout(timer);
   }, []);
 
   return (
-    <div className={`loader ${hidden ? 'loader-hidden' : ''}`}>
-      <div className="loader-stage" aria-hidden="true">
-        <div className="loader-orbit loader-orbit-one" />
-        <div className="loader-orbit loader-orbit-two" />
-        <div className="loader-core">
-          <span>AS</span>
-        </div>
-      </div>
-
+    <div className={`loader ${isDone ? 'loader-hidden' : ''}`}>
       <div className="loader-content">
-        <p className="loader-label loader-label-top">Full Stack Developer</p>
+        <div className="loader-strip loader-strip-top">
+          <div className="loader-strip-track">
+            <span>Full Stack Developer</span>
+            <span>Full Stack Developer</span>
+            <span>Full Stack Developer</span>
+            <span>Full Stack Developer</span>
+          </div>
+        </div>
 
         <div className="loader-bar-wrap">
-          <div className="loader-ticker">
-            <span>Loading Experience</span>
-            <span>Websites</span>
-            <span>Apps</span>
-            <span>Frontend</span>
-            <span>Backend</span>
-            <span>Motion</span>
-            <span>Performance</span>
-          </div>
+          <div className="loader-main-text">Loading</div>
           <div className="loader-progress"><span /></div>
         </div>
 
-        <p className="loader-label loader-label-bottom">Creative Web Designer</p>
+        <div className="loader-strip loader-strip-bottom">
+          <div className="loader-strip-track reverse">
+            <span>Creative Web Designer</span>
+            <span>Creative Web Designer</span>
+            <span>Creative Web Designer</span>
+            <span>Creative Web Designer</span>
+          </div>
+        </div>
       </div>
     </div>
   );
