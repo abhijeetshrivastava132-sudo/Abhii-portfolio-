@@ -1,5 +1,6 @@
 import './corridor.css';
 import './gameworld.css';
+import './hero-custom.css';
 
 const projects = [
   { id: '01', title: 'Bliptwit', type: 'Secure Chat Concept', description: 'Privacy-first chat concept with clean UI and modern product-style interactions.', image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop', link: 'https://bliptwit.vercel.app' },
@@ -13,16 +14,18 @@ const services = ['Website Design', 'Full Stack Development', 'App UI Design', '
 export default function App() {
   return (
     <div className="portfolio-page exact-portfolio">
-      <header className="topbar">
-        <a href="#home" className="brand">Abhii Designs</a>
-        <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#services">Services</a><a href="#contact">Contact</a></nav>
-      </header>
       <main>
-        <section className="hero-section" id="home">
-          <p className="eyebrow">Web Designer & Full Stack Developer</p>
-          <h1>I design and build websites for businesses.</h1>
-          <p>Modern, mobile-first websites with clean UI, smooth experience, and launch-ready development.</p>
-          <div className="hero-actions"><a href="#work" className="primary-btn">View Work</a><a href="#contact" className="ghost-btn">Start Project</a></div>
+        <section className="hero-section hero-new" id="home">
+          <div className="hero-corner hero-corner-left">Abhii Portfolio</div>
+          <nav className="hero-corner hero-corner-right" aria-label="Main navigation">
+            <a href="#home">ABOUT</a>
+            <a href="#work">WORK</a>
+            <a href="#contact">CONTACT</a>
+          </nav>
+          <div className="hero-intro-block">
+            <p>Hello! I'm</p>
+            <h1>ABHIJEET SHRIVASTAV</h1>
+          </div>
         </section>
 
         <section className="work-section" id="work">
