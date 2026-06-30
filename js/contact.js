@@ -2,6 +2,7 @@ const form = document.querySelector('.contact-form');
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const messageInput = document.querySelector('#message');
+const submitButton = form.querySelector('button[type="submit"]');
 
 const popup = document.createElement('div');
 popup.className = 'form-popup';
@@ -12,6 +13,7 @@ popup.innerHTML = `
 `;
 document.body.appendChild(popup);
 
+const popupTitle = popup.querySelector('h3');
 const popupText = popup.querySelector('p');
 const popupClose = popup.querySelector('button');
 let popupTimer;
@@ -20,7 +22,8 @@ function isValidEmail(email){
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
 
-function showPopup(message){
+function showPopup(title, message){
+    popupTitle.textContent = title;
     popupText.textContent = message;
     popup.classList.add('active');
     clearTimeout(popupTimer);
@@ -53,7 +56,9 @@ popupClose.addEventListener('click', () => {
     popup.classList.remove('active');
 });
 
-form.addEventListener('submit', function(event){
+form.addEventListener('submit', async function(event){
+    event.preventDefault();
+
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const message = messageInput.value.trim();
@@ -61,25 +66,48 @@ form.addEventListener('submit', function(event){
     clearErrors();
 
     if(name.length === 0){
-        event.preventDefault();
         setFieldError(nameInput, 'Name is required.');
-        showPopup('Please enter your name before submitting the form.');
+        showPopup('Name required', 'Please enter your name before submitting the form.');
         nameInput.focus();
         return;
     }
 
     if(!isValidEmail(email)){
-        event.preventDefault();
         setFieldError(emailInput, 'Use a valid email format.');
-        showPopup('Please enter a valid email address so I can reply to your message.');
+        showPopup('Invalid email address', 'Please enter a valid email address so I can reply to your message.');
         emailInput.focus();
         return;
     }
 
     if(message.length < 15){
-        event.preventDefault();
         setFieldError(messageInput, 'Add more project details.');
-        showPopup('Please describe your project in a little more detail.');
+        showPopup('Project details required', 'Please describe your project in a little more detail.');
         messageInput.focus();
+        return;
     }
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    try{
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if(response.ok){
+            form.reset();
+            showPopup('Message sent', 'Thanks for reaching out. I will get back to you soon.');
+        }else{
+            showPopup('Message not sent', 'Something went wrong. Please try again in a moment.');
+        }
+    }catch(error){
+        showPopup('Network error', 'Please check your connection and try again.');
+    }
+
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send Message →';
 });
