@@ -1,4 +1,5 @@
 const form = document.querySelector('.contact-form');
+const contactIntro = document.querySelector('.contact-wrap > p');
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const messageInput = document.querySelector('#message');
@@ -11,7 +12,7 @@ popup.innerHTML = `
     <h3>Form needs attention</h3>
     <p></p>
 `;
-document.body.appendChild(popup);
+contactIntro.insertAdjacentElement('afterend', popup);
 
 const popupTitle = popup.querySelector('h3');
 const popupText = popup.querySelector('p');
