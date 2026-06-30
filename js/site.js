@@ -1,3 +1,8 @@
+if(window.location.pathname.endsWith('/index.html')){
+    const cleanPath = window.location.pathname.replace(/index\.html$/, '');
+    window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+}
+
 document.addEventListener('contextmenu', function(event){
     event.preventDefault();
 });
