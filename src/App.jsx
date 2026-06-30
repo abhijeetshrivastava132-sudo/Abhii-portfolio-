@@ -22,7 +22,7 @@ export default function App() {
       <section className={`about-page ${aboutOpen ? 'active' : ''}`}>
         <div className="about-header">
           <h2 className="about-title">About Me</h2>
-          <button className="close-btn" type="button" onClick={() => setAboutOpen(false)}>x</button>
+          <button className="close-btn" type="button" onClick={() => setAboutOpen(false)}>&times;</button>
         </div>
 
         <div className="about-content">
