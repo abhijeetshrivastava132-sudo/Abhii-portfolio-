@@ -1,4 +1,5 @@
 const form = document.querySelector('.contact-form');
+const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const messageInput = document.querySelector('#message');
 
@@ -7,8 +8,16 @@ function isValidEmail(email){
 }
 
 form.addEventListener('submit', function(event){
+    const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const message = messageInput.value.trim();
+
+    if(name.length === 0){
+        event.preventDefault();
+        alert('Please enter your name');
+        nameInput.focus();
+        return;
+    }
 
     if(!isValidEmail(email)){
         event.preventDefault();
