@@ -3,32 +3,83 @@ const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const messageInput = document.querySelector('#message');
 
+const popup = document.createElement('div');
+popup.className = 'form-popup';
+popup.innerHTML = `
+    <button type="button" aria-label="Close message">x</button>
+    <h3>Check the form</h3>
+    <p></p>
+`;
+document.body.appendChild(popup);
+
+const popupText = popup.querySelector('p');
+const popupClose = popup.querySelector('button');
+let popupTimer;
+
 function isValidEmail(email){
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 }
+
+function showPopup(message){
+    popupText.textContent = message;
+    popup.classList.add('active');
+    clearTimeout(popupTimer);
+    popupTimer = setTimeout(() => {
+        popup.classList.remove('active');
+    }, 3500);
+}
+
+function setFieldError(input, message){
+    const field = input.closest('.field');
+    let error = field.querySelector('.field-error');
+
+    if(!error){
+        error = document.createElement('span');
+        error.className = 'field-error';
+        field.appendChild(error);
+    }
+
+    error.textContent = message;
+    field.classList.add('error');
+}
+
+function clearErrors(){
+    document.querySelectorAll('.field.error').forEach(field => {
+        field.classList.remove('error');
+    });
+}
+
+popupClose.addEventListener('click', () => {
+    popup.classList.remove('active');
+});
 
 form.addEventListener('submit', function(event){
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const message = messageInput.value.trim();
 
+    clearErrors();
+
     if(name.length === 0){
         event.preventDefault();
-        alert('Please enter your name');
+        setFieldError(nameInput, 'Your name is required.');
+        showPopup('Please enter your name before sending the message.');
         nameInput.focus();
         return;
     }
 
     if(!isValidEmail(email)){
         event.preventDefault();
-        alert('Please enter a valid email address with @ and .');
+        setFieldError(emailInput, 'Enter a valid email address.');
+        showPopup('Please enter a valid email address so I can reply to you.');
         emailInput.focus();
         return;
     }
 
     if(message.length < 15){
         event.preventDefault();
-        alert('Describe your project');
+        setFieldError(messageInput, 'Write at least 15 characters.');
+        showPopup('Please describe your project in a little more detail.');
         messageInput.focus();
     }
 });
